@@ -1,29 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   config.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/22 17:58:30 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/07/22 17:58:33 by jgarcia          ###   ########.fr       */
+/*   Created: 2022/07/27 12:39:18 by jgarcia           #+#    #+#             */
+/*   Updated: 2022/07/27 12:39:22 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "fractol.h"
 
-int	main(int argc, char **argv)
-{
-	t_data	*data;
-
-	data = NULL;
-	data = main_init();
-	if (data == NULL)
-	{
-		write(1,"allocation error\n",17);
-		return (1);
-	}
-	get_args(argc,argv, data);
-	mlx_loop_hook(data->mlx, render, data);
-	mlx_loop(data->mlx);
-	return (0);
-}
+#ifndef FRACTOL_CONFIG_H
+#define FRACTOL_CONFIG_H
+# define DEFAULT_X 600;
+# define DEFAULT_Y 600;
+#endif //FRACTOL_CONFIG_H
