@@ -31,7 +31,7 @@ void clear_buffer(t_data *data)
 		x = 0;
 		while (x < data->size_x)
 		{
-			put_pixel_2_img(data->img_buffer,x,y,0);
+			put_pixel_2_img(data->img_buffer,x,y,0xa7a7a7);
 			x ++;
 		}
 		y ++;

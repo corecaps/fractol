@@ -48,7 +48,8 @@ void render_escape(t_data *data)
 			}
 			if (iter == MAX_ITER)
 				iter = 0;
-			iter = iter * 255 / MAX_ITER;
+			iter = ((iter*iter)%255) * 255 / MAX_ITER;
+            iter = iter + iter * 0x100 + iter * 0x10000;
 			put_pixel_2_img(data->img_buffer,x,y,iter);
 			x ++;
 		}

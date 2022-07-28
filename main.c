@@ -23,6 +23,8 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	get_args(argc,argv, data);
+    mlx_mouse_hook(data->mlx_win, mouse_events, data);
+    mlx_hook(data->mlx_win, 2, 1L << 0, key_pressed,data);
 	mlx_loop_hook(data->mlx, render, data);
 	mlx_loop(data->mlx);
 	return (0);

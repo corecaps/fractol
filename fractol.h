@@ -53,4 +53,6 @@ t_data	*main_init(void);
 t_complex warp_coord_to_complex(int x, int y, t_data *data);
 void put_pixel_2_img(t_buffer *img,int x, int y, int color);
 void render_escape(t_data *data);
+int key_pressed(int keycode, t_data *data);
+int mouse_events(int button, int x, int y, t_data *data);
 #endif //FRACTOL_FRACTOL_H
