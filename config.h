@@ -12,6 +12,7 @@
 
 #ifndef FRACTOL_CONFIG_H
 #define FRACTOL_CONFIG_H
-# define DEFAULT_X 600;
-# define DEFAULT_Y 600;
+# define DEFAULT_X 600
+# define DEFAULT_Y 600
+# define MAX_ITER 60
 #endif //FRACTOL_CONFIG_H

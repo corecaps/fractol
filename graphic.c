@@ -34,16 +34,32 @@ void clear_buffer(t_data *data)
 			put_pixel_2_img(data->img_buffer,x,y,0);
 			x ++;
 		}
+		y ++;
 	}
 }
 
 
 int	render(t_data *data)
 {
-	clear_buffer(data);
-	mlx_put_image_to_window(data->mlx,
-							data->mlx_win,
-							data->img_buffer,
-							0,0);
+	static int frame = 0;
+
+	if (frame == 0)
+	{
+		clear_buffer(data);
+		frame ++;
+	}
+	else if (frame == 1)
+	{
+		render_escape(data);
+		frame ++;
+	}
+	else if (frame == 2)
+	{
+		mlx_put_image_to_window(data->mlx,
+								data->mlx_win,
+								data->img_buffer->img,
+								0, 0);
+		frame = 0;
+	}
 	return (0);
 }

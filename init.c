@@ -29,7 +29,7 @@ t_data *alloc_mem()
 	data->img_buffer = malloc(sizeof (t_buffer));
 	if (data->img_buffer == NULL)
 	{
-		free(data);
+//		free(data);
 		return (NULL);
 	}
 	return (data);
@@ -41,7 +41,11 @@ void init_data(t_data *data)
 	data->mlx = mlx_init();
 	data->size_x = DEFAULT_X;
 	data->size_y = DEFAULT_Y;
-	data->mlx_win = mlx_new_window(data->mlx, data->size_x, data->size_y,
+	data->start_i = -2.0;
+	data->stop_i = 2.0;
+	data->start_r = -2.0;
+	data->stop_r = 2.0;
+	data->mlx_win = mlx_new_window(data->mlx, data->size_x+1, data->size_y+1,
 								   "fractol");
 	data->img_buffer->img = mlx_new_image(data->mlx,
 										  data->size_x + 1,
