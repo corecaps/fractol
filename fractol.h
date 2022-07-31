@@ -45,16 +45,23 @@ typedef struct s_data
 	double 		stop_r;
 	double 		start_i;
 	double 		stop_i;
+	double		cplx_size_x;
+	double 		cplx_size_y;
+	double 		center_x;
+	double 		center_y;
+	double 		zoom_factor_x;
+	double 		zoom_factor_y;
 }t_data;
 
-int		render(t_data *data);
-void	get_args(int argc, char **argv, t_data *data);
-t_data	*main_init(void);
-t_complex warp_coord_to_complex(int x, int y, t_data *data);
-void put_pixel_2_img(t_buffer *img,int x, int y, int color);
-void render_escape(t_data *data);
-int key_pressed(int keycode, t_data *data);
-int mouse_events(int button, int x, int y, t_data *data);
-int rgb_to_mlx_color(int red, int green,int blue);
-int	hsv_to_rgb(int hue, int sat, int value);
+int			render(t_data *data);
+void		get_args(int argc, char **argv, t_data *data);
+t_data		*main_init(void);
+t_complex	warp_coord_to_complex(int x, int y, t_data *data);
+void		put_pixel_2_img(t_buffer *img,int x, int y, int color);
+void		render_escape(t_data *data);
+int			key_pressed(int keycode, t_data *data);
+int			mouse_events(int button, int x, int y, t_data *data);
+int			rgb_to_mlx_color(int red, int green,int blue);
+int			hsv_to_rgb(int hue, int sat, int value);
+void		update_coord(t_data *data);
 #endif //FRACTOL_FRACTOL_H

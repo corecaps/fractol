@@ -41,10 +41,16 @@ void init_data(t_data *data)
 	data->mlx = mlx_init();
 	data->size_x = DEFAULT_X;
 	data->size_y = DEFAULT_Y;
-	data->start_i = -1.5;
-	data->stop_i = 1.5;
+	data->start_i = -1.13;
+	data->stop_i = 1.13;
 	data->start_r = -1.7;
-	data->stop_r = 1.2;
+	data->stop_r = 0.56;
+	data->center_x = (data->start_r + data->stop_r) / 2;
+	data->center_y = (data->start_i + data->stop_i) / 2;
+	data->cplx_size_x = (data->stop_r - data->start_r);
+	data->cplx_size_y = data->stop_i - data->start_i;
+	data->zoom_factor_x  = data->cplx_size_x / data->size_x;
+	data->zoom_factor_y = data->cplx_size_y /data->size_y;
 	data->mlx_win = mlx_new_window(data->mlx, data->size_x+1, data->size_y+1,
 								   "fractol");
 	data->img_buffer->img = mlx_new_image(data->mlx,

@@ -12,27 +12,29 @@
 
 #include "fractol.h"
 
+
+
 int key_pressed(int keycode, t_data *data)
 {
     if (keycode == KEY_UP)
     {
-        data->start_i += 0.01;
-        data->stop_i  += 0.01;
+        data->center_y -= data->zoom_factor_y * 4;
+		update_coord(data);
     }
     else if (keycode == KEY_DOWN)
     {
-        data->start_i -= 0.01;
-        data->stop_i -= 0.01;
+        data->center_y += data->zoom_factor_y * 4;
+		update_coord(data);
     }
     else if (keycode == KEY_LEFT)
     {
-        data->start_r += 0.01;
-        data->stop_r += 0.01;
+        data->center_x -= data->zoom_factor_x * 4;
+		update_coord(data);
     }
     else if (keycode == KEY_RIGHT)
     {
-        data->start_r -= 0.01;
-        data->stop_r -= 0.01;
+        data->center_x += data->zoom_factor_x * 4;
+		update_coord(data);
     }
     else if (keycode == KEY_ESC)
     {
@@ -43,21 +45,32 @@ int key_pressed(int keycode, t_data *data)
 
 int mouse_events(int button, int x, int y, t_data *data)
 {
-    (void) x;
-    (void) y;
+	t_complex	new_center;
+
+	new_center = warp_coord_to_complex(x,y,data);
+	data->center_x = new_center.r;
+	data->center_y = new_center.i;
     if (button == 4)
     {
-        data->start_r += 0.01;
-        data->stop_r -= 0.01;
-        data->start_i += 0.01;
-        data->stop_i -= 0.01;
-    }
+		data->zoom_factor_x *= 0.9;
+		data->zoom_factor_y *= 0.9;
+		update_coord(data);
+	}
     else if (button == 5)
     {
-        data->start_r -= 0.01;
-        data->stop_r += 0.01;
-        data->start_i -= 0.01;
-        data->stop_i += 0.01;
+		data->zoom_factor_x *= 1.1;
+		data->zoom_factor_y *= 1.1;
+		update_coord(data);
     }
     return (0);
+}
+
+void update_coord(t_data *data)
+{
+	data->cplx_size_x = data->size_x * data->zoom_factor_x;
+	data->cplx_size_y = data->size_y * data->zoom_factor_y;
+	data->start_r = data->center_x - (data->cplx_size_x / 2);
+	data->stop_r = data->center_x + (data->cplx_size_x / 2);
+	data->start_i = data->center_y - (data->cplx_size_x /2);
+	data->stop_i = data->center_y + (data->cplx_size_y /2);
 }

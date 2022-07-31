@@ -35,7 +35,7 @@ void render_escape(t_data *data)
 	while (y < data->size_y -1)
 	{
 		x = 0;
-		while (x < data->size_y -1 )
+		while (x < data->size_x -1 )
 		{
 			c = warp_coord_to_complex(x,y,data);
 			point = c;
