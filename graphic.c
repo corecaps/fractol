@@ -37,7 +37,71 @@ void clear_buffer(t_data *data)
 		y ++;
 	}
 }
+int rgb_to_mlx_color(int red, int green,int blue)
+{
+	int	color;
 
+	color = red * 0x10000 + green * 0x100 + blue;
+	return (color);
+}
+
+int	hsv_to_rgb(int hue, int sat, int value)
+{
+	double	x;
+	double 	m;
+	double	c;
+	int		red;
+	int 	green;
+	int 	blue;
+	double 	r;
+	double 	g;
+	double	b;
+
+
+	c = ((double)value / 100) * ((double)sat / 100);
+	x = c * (1 - abs((hue / 60) % 2) - 1);
+	m = ((double) value / 100) - c;
+	if (hue >= 0 && hue < 60)
+	{
+		r = c;
+		g = x;
+		b = 0;
+	}
+	else if (hue >= 60 && hue < 120)
+	{
+		r = x;
+		g =c;
+		b = 0;
+	}
+	else if (hue >= 120 && hue < 180)
+	{
+		r = 0;
+		g = c;
+		b = x;
+	}
+	else if (hue >= 180 && hue < 240)
+	{
+		r = 0;
+		g = x;
+		b = c;
+	}
+	else if (hue >= 240 && hue < 300)
+	{
+		r = x;
+		g = 0;
+		b = c;
+	}
+	else if (hue >= 300 && hue <= 360)
+	{
+		r = c;
+		g = 0;
+		b = x;
+	}
+	red = (int) round(r + m * 255);
+	green = (int) round(g + m * 255);
+	blue = (int) round(b + m * 255);
+	return (rgb_to_mlx_color(red,green,blue));
+}
 
 int	render(t_data *data)
 {

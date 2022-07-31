@@ -29,6 +29,7 @@ void render_escape(t_data *data)
 	int 		x;
 	int 		y;
 	int 		iter;
+	int 		color;
 
 	y = 0;
 	while (y < data->size_y -1)
@@ -48,9 +49,11 @@ void render_escape(t_data *data)
 			}
 			if (iter == MAX_ITER)
 				iter = 0;
-			iter = ((iter*iter)%255) * 255 / MAX_ITER;
-            iter = iter + iter * 0x100 + iter * 0x10000;
-			put_pixel_2_img(data->img_buffer,x,y,iter);
+			if (iter > 0)
+				color = hsv_to_rgb((iter * 360 )/ MAX_ITER,100,255);
+			else
+				color = 0;
+			put_pixel_2_img(data->img_buffer,x,y,color);
 			x ++;
 		}
 		y ++;

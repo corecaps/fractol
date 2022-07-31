@@ -12,9 +12,9 @@
 
 #ifndef FRACTOL_CONFIG_H
 #define FRACTOL_CONFIG_H
-# define DEFAULT_X 1024
-# define DEFAULT_Y 1024
-# define MAX_ITER 60
+# define DEFAULT_X 1000
+# define DEFAULT_Y 1000
+# define MAX_ITER 80
 # define KEY_UP 65362
 # define KEY_DOWN 65364
 # define KEY_LEFT 65361
