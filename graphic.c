@@ -31,7 +31,7 @@ void clear_buffer(t_data *data)
 		x = 0;
 		while (x < data->size_x)
 		{
-			put_pixel_2_img(data->img_buffer,x,y,0xa7a7a7);
+			put_pixel_2_img(data->img_buffer,x,y,0xffffff);
 			x ++;
 		}
 		y ++;
@@ -48,7 +48,7 @@ int rgb_to_mlx_color(int red, int green,int blue)
 int	hsv_to_rgb(int hue, int sat, int value)
 {
 	double	x;
-	double 	m;
+	//double 	m;
 	double	c;
 	int		red;
 	int 	green;
@@ -57,10 +57,11 @@ int	hsv_to_rgb(int hue, int sat, int value)
 	double 	g;
 	double	b;
 
-
-	c = ((double)value / 100) * ((double)sat / 100);
+	(void) value;
+	(void) sat;
+	c = 1.0;//((double)value / 100) * ((double)sat / 100);
 	x = c * (1 - abs((hue / 60) % 2) - 1);
-	m = ((double) value / 100) - c;
+	//m = 1.0; //((double) value / 100) - c;
 	if (hue >= 0 && hue < 60)
 	{
 		r = c;
@@ -97,9 +98,9 @@ int	hsv_to_rgb(int hue, int sat, int value)
 		g = 0;
 		b = x;
 	}
-	red = (int) round(r + m * 255);
-	green = (int) round(g + m * 255);
-	blue = (int) round(b + m * 255);
+	red = (int) round(r  * 255);
+	green = (int) round(g  * 255);
+	blue = (int) round(b * 255);
 	return (rgb_to_mlx_color(red,green,blue));
 }
 
