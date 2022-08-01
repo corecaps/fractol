@@ -16,8 +16,8 @@ t_complex warp_coord_to_complex(int x, int y, t_data *data)
 {
 	t_complex point;
 
-	point.r = data->start_r + ((double) (x) * (data->stop_r - data->start_r)) / data->size_x;
-	point.i = data->start_i + ((double) (y) * (data->stop_i - data->start_i)) / data->size_y;
+	point.r = data->start_r + ((long double) (x) * (data->stop_r - data->start_r)) / data->size_x;
+	point.i = data->start_i + ((long double) (y) * (data->stop_i - data->start_i)) / data->size_y;
 	return (point);
 }
 
@@ -25,7 +25,7 @@ void render_escape(t_data *data)
 {
 	t_complex	c;
 	t_complex 	point;
-	double		tmp;
+	long double	tmp;
 	int 		x;
 	int 		y;
 	int 		iter;

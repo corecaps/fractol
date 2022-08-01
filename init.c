@@ -44,8 +44,7 @@ void init_data(t_data *data)
 	data->start_i = -1.13;
 	data->stop_i = 1.13;
 	data->start_r = -1.7;
-	data->stop_r = 0.56
-			;
+	data->stop_r = 0.5;
 	data->center_x = (data->start_r + data->stop_r) / 2;
 	data->center_y = (data->start_i + data->stop_i) / 2;
 	data->cplx_size_x = (data->stop_r - data->start_r);

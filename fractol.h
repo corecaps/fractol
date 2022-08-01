@@ -21,8 +21,8 @@
 
 typedef struct s_complex
 {
-	double r;
-	double i;
+	long double r;
+	long double i;
 } t_complex;
 
 typedef struct s_buffer
@@ -41,16 +41,16 @@ typedef struct s_data
 	t_buffer	*img_buffer;
 	int 		size_x;
 	int 		size_y;
-	double		start_r;
-	double 		stop_r;
-	double 		start_i;
-	double 		stop_i;
-	double		cplx_size_x;
-	double 		cplx_size_y;
-	double 		center_x;
-	double 		center_y;
-	double 		zoom_factor_x;
-	double 		zoom_factor_y;
+	long double	start_r;
+	long double	stop_r;
+	long double	start_i;
+	long double	stop_i;
+	long double	cplx_size_x;
+	long double	cplx_size_y;
+	long double	center_x;
+	long double	center_y;
+	long double	zoom_factor_x;
+	long double	zoom_factor_y;
 }t_data;
 
 int			render(t_data *data);
