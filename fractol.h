@@ -36,6 +36,8 @@ typedef struct s_buffer
 
 typedef struct s_data
 {
+    int         argc;
+    char        **argv;
 	void		*mlx;
 	void		*mlx_win;
 	t_buffer	*img_buffer;
@@ -52,14 +54,15 @@ typedef struct s_data
 	long double	zoom_factor_x;
 	long double	zoom_factor_y;
 	int 		redraw;
+    void        (*algorithm)(struct s_data *);
 }t_data;
 
 int			render(t_data *data);
-void		get_args(int argc, char **argv, t_data *data);
-t_data		*main_init(void);
+void		get_args(t_data *data);
+t_data *main_init(int argc, char **argv);
 t_complex	warp_coord_to_complex(int x, int y, t_data *data);
 void		put_pixel_2_img(t_buffer *img,int x, int y, int color);
-void		render_escape(t_data *data);
+void		mandelbrot_escape(t_data *data);
 int			key_pressed(int keycode, t_data *data);
 int			mouse_events(int button, int x, int y, t_data *data);
 int			rgb_to_mlx_color(int red, int green,int blue);

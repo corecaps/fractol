@@ -16,13 +16,12 @@ int	main(int argc, char **argv)
 	t_data	*data;
 
 	data = NULL;
-	data = main_init();
+	data = main_init(argc, argv);
 	if (data == NULL)
 	{
 		write(1,"allocation error\n",17);
 		return (1);
 	}
-	get_args(argc,argv, data);
     mlx_mouse_hook(data->mlx_win, mouse_events, data);
     mlx_hook(data->mlx_win, 2, 1L << 0, key_pressed,data);
 	mlx_loop_hook(data->mlx, render, data);

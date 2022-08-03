@@ -52,14 +52,14 @@ int mouse_events(int button, int x, int y, t_data *data)
 	data->center_y = (data->center_y + new_center.i) / 2;
     if (button == 4)
     {
-		data->zoom_factor_x *= 0.9;
-		data->zoom_factor_y *= 0.9;
+		data->zoom_factor_x *= 0.95;
+		data->zoom_factor_y *= 0.95;
 		update_coord(data);
 	}
     else if (button == 5)
     {
-		data->zoom_factor_x *= 1.1;
-		data->zoom_factor_y *= 1.1;
+		data->zoom_factor_x *= 1.05;
+		data->zoom_factor_y *= 1.05;
 		update_coord(data);
     }
     return (0);

@@ -21,7 +21,7 @@ t_complex warp_coord_to_complex(int x, int y, t_data *data)
 	return (point);
 }
 
-void render_escape(t_data *data)
+void mandelbrot_escape(t_data *data)
 {
 	t_complex	c;
 	t_complex 	point;

@@ -11,12 +11,43 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <string.h>
 
-void	get_args(int argc, char **argv, t_data *data)
+void	get_args(t_data *data)
 {
-	(void) argc;
-	(void) argv;
-	(void) data;
+    int argp;
+    int argc = data->argc;
+    char **argv = data->argv;
+
+    if (argc > 1)
+    {
+        argp = 1;
+        while (argp < argc)
+        {
+            if (argv[argp][0] == '-')
+            {
+                if (argv[argp][1] == 's')
+                {
+                    argp++;
+                    data->size_x = atoi(argv[argp]) + 1;
+                    data->size_y = atoi(argv[argp]) + 1;
+                }
+            }
+            if (strcmp(argv[argp], "mandelbrot") == 0)
+            {
+                data->algorithm = mandelbrot_escape;
+                break;
+            }
+            argp ++;
+        }
+    }
+    if (data->algorithm == NULL)
+    {
+        printf("Usage:\n\t %s [options] fractal_type\n",argv[0]);
+        printf("fractal_type :\n\tmandelbrot\n\tjulia\n");
+        printf("Options :\n\t-s size\toverride the default windows size to size\n");
+        exit(1);
+    }
 }
 
 t_data *alloc_mem()
@@ -52,6 +83,8 @@ void init_data(t_data *data)
 	data->zoom_factor_x  = data->cplx_size_x / data->size_x;
 	data->zoom_factor_y = data->cplx_size_y /data->size_y;
 	data->redraw = 1;
+    data->algorithm = NULL;
+    get_args(data);
 	data->mlx_win = mlx_new_window(data->mlx, data->size_x+1, data->size_y+1,
 								   "fractol");
 	data->img_buffer->img = mlx_new_image(data->mlx,
@@ -63,13 +96,15 @@ void init_data(t_data *data)
 												  &data->img_buffer->endian);
 }
 
-t_data	*main_init(void)
+t_data *main_init(int argc, char **argv)
 {
 	t_data	*data;
 
 	data = alloc_mem();
 	if (data == NULL)
 		return (NULL);
+    data->argc = argc;
+    data->argv = argv;
 	init_data(data);
 	return (data);
 }

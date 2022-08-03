@@ -116,7 +116,7 @@ int	render(t_data *data)
 		}
 		else if (frame == 1)
 		{
-			render_escape(data);
+            (*data->algorithm)(data);
 			frame++;
 		}
 		else if (frame == 2)
