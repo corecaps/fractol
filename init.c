@@ -30,10 +30,10 @@ void	get_args(t_data *data)
                 {
                     argp++;
                     data->size_x = atoi(argv[argp]) + 1;
-                    data->size_y = atoi(argv[argp]) + 1;
+                    data->size_y = atoi(argv[argp]) + 1; // TODO : utiliser ft_atoi
                 }
             }
-            if (strcmp(argv[argp], "mandelbrot") == 0)
+            if (strcmp(argv[argp], "mandelbrot") == 0) // TODO : utiliser ft_printf
             {
                 data->algorithm = mandelbrot_escape;
                 break;
