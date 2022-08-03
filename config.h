@@ -6,7 +6,7 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:39:18 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/07/28 16:33:18 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/01 18:48:39 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define FRACTOL_CONFIG_H
 # define DEFAULT_X 900
 # define DEFAULT_Y 900
-# define MAX_ITER 300
+# define MAX_ITER 80
 
 # define KEY_UP 65362
 # define KEY_DOWN 65364

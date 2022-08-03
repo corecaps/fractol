@@ -59,7 +59,7 @@ int	hsv_to_rgb(int hue, int sat, int value)
 
 	(void) value;
 	(void) sat;
-	c = 1.0;//((double)value / 100) * ((double)sat / 100);
+	c = ((double)value / 100) * ((double)sat / 100);
 	x = c * (1 - abs((hue / 60) % 2) - 1);
 	//m = 1.0; //((double) value / 100) - c;
 	if (hue >= 0 && hue < 60)
@@ -107,24 +107,27 @@ int	hsv_to_rgb(int hue, int sat, int value)
 int	render(t_data *data)
 {
 	static int frame = 0;
-
-	if (frame == 0)
+	if (data->redraw == 1)
 	{
-		clear_buffer(data);
-		frame ++;
-	}
-	else if (frame == 1)
-	{
-		render_escape(data);
-		frame ++;
-	}
-	else if (frame == 2)
-	{
-		mlx_put_image_to_window(data->mlx,
-								data->mlx_win,
-								data->img_buffer->img,
-								0, 0);
-		frame = 0;
+		if (frame == 0)
+		{
+			clear_buffer(data);
+			frame++;
+		}
+		else if (frame == 1)
+		{
+			render_escape(data);
+			frame++;
+		}
+		else if (frame == 2)
+		{
+			mlx_put_image_to_window(data->mlx,
+									data->mlx_win,
+									data->img_buffer->img,
+									0, 0);
+			frame = 0;
+			data->redraw = 0;
+		}
 	}
 	return (0);
 }

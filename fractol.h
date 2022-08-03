@@ -51,6 +51,7 @@ typedef struct s_data
 	long double	center_y;
 	long double	zoom_factor_x;
 	long double	zoom_factor_y;
+	int 		redraw;
 }t_data;
 
 int			render(t_data *data);

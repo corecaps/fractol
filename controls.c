@@ -6,7 +6,7 @@
 /*   By: jgarcia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 12:15:18 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/07/28 12:15:22 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/01 18:49:04 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int mouse_events(int button, int x, int y, t_data *data)
 	t_complex	new_center;
 
 	new_center = warp_coord_to_complex(x,y,data);
-	data->center_x = new_center.r;
-	data->center_y = new_center.i;
+	data->center_x = (data->center_x + new_center.r) / 2;
+	data->center_y = (data->center_y + new_center.i) / 2;
     if (button == 4)
     {
 		data->zoom_factor_x *= 0.9;
@@ -73,4 +73,5 @@ void update_coord(t_data *data)
 	data->stop_r = data->center_x + (data->cplx_size_x / 2);
 	data->start_i = data->center_y - (data->cplx_size_x /2);
 	data->stop_i = data->center_y + (data->cplx_size_y /2);
+	data->redraw = 1;
 }

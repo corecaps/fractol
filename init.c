@@ -51,6 +51,7 @@ void init_data(t_data *data)
 	data->cplx_size_y = data->stop_i - data->start_i;
 	data->zoom_factor_x  = data->cplx_size_x / data->size_x;
 	data->zoom_factor_y = data->cplx_size_y /data->size_y;
+	data->redraw = 1;
 	data->mlx_win = mlx_new_window(data->mlx, data->size_x+1, data->size_y+1,
 								   "fractol");
 	data->img_buffer->img = mlx_new_image(data->mlx,

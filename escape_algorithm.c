@@ -47,10 +47,12 @@ void render_escape(t_data *data)
 				point.r = tmp;
 				iter ++;
 			}
+			if (iter <= 5)
+				iter = 10;
 			if (iter == MAX_ITER)
 				iter = 0;
 			if (iter > 0)
-				color = hsv_to_rgb((iter * 360 )/ MAX_ITER,100,(iter * 100)/ MAX_ITER);
+				color = hsv_to_rgb((iter * 360 )/ MAX_ITER,100,(log(iter) * 100)/ log(MAX_ITER));
 			else
 				color = 0;
 			put_pixel_2_img(data->img_buffer,x,y,color);
