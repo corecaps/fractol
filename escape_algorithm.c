@@ -40,15 +40,22 @@ void render_escape(t_data *data)
 			c = warp_coord_to_complex(x,y,data);
 			point = c;
 			iter = 0;
-			while ((point.r * point.r + point.i * point.i <= 2) && (iter < MAX_ITER))
-			{
-				tmp = point.r * point.r - point.i * point.i + c.r;
-				point.i = 2 * point.r * point.i + c.i;
-				point.r = tmp;
-				iter ++;
-			}
-			if (iter <= 5)
-				iter = 10;
+            tmp = (((4.0L * (c.r * c.r))-(2.0L*c.r)+(1.0L/4.0L))) + (c.i * c.i);
+            if (tmp * (tmp + (c.r - (1.0L / 4.0L))) > ((c.i*c.i) / 4.0L))
+            {
+                while ((point.r * point.r + point.i * point.i <= 2) && (iter < MAX_ITER))
+                {
+                    tmp = point.r * point.r - point.i * point.i + c.r;
+                    point.i = 2 * point.r * point.i + c.i;
+                    point.r = tmp;
+                    iter++;
+                }
+            } else
+            {
+                iter = MAX_ITER;
+            }
+			if (iter <= 2)
+				iter = 2;
 			if (iter == MAX_ITER)
 				iter = 0;
 			if (iter > 0)
