@@ -106,28 +106,28 @@ int	hsv_to_rgb(int hue, int sat, int value)
 
 int	render(t_data *data)
 {
-	static int frame = 0;
-	if (data->redraw == 1)
-	{
-		if (frame == 0)
-		{
+//	static int frame = 0;
+//	if (data->redraw == 1)
+//	{
+//		if (frame == 0)
+//		{
 			clear_buffer(data);
-			frame++;
-		}
-		else if (frame == 1)
-		{
+//			frame++;
+//		}
+//		else if (frame == 1)
+//		{
             (*data->algorithm)(data);
-			frame++;
-		}
-		else if (frame == 2)
-		{
+//			frame++;
+//		}
+//		else if (frame == 2)
+//		{
 			mlx_put_image_to_window(data->mlx,
 									data->mlx_win,
 									data->img_buffer->img,
 									0, 0);
-			frame = 0;
-			data->redraw = 0;
-		}
-	}
+//			frame = 0;
+//			data->redraw = 0;
+//		}
+//	}
 	return (0);
 }

@@ -38,6 +38,11 @@ void	get_args(t_data *data)
                 data->algorithm = mandelbrot_escape;
                 break;
             }
+			else if (strcmp(argv[argp], "julia") == 0) // TODO : utiliser ft_printf
+			{
+				data->algorithm = julia_escape;
+				break;
+			}
             argp ++;
         }
     }

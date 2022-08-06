@@ -18,7 +18,7 @@ CFLAGS = -Wall -Wextra -Werror -g -c
 INC = -Iminilibx-linux/
 LINK = -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lz
 
-SRC = main.c graphic.c init.c madelbrot_escape.c controls.c
+SRC = main.c graphic.c init.c mandelbrot_escape.c controls.c julia_escape.c
 
 OBJ = $(SRC:.c=.o)
 

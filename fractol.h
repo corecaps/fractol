@@ -68,4 +68,5 @@ int			mouse_events(int button, int x, int y, t_data *data);
 int			rgb_to_mlx_color(int red, int green,int blue);
 int			hsv_to_rgb(int hue, int sat, int value);
 void		update_coord(t_data *data);
+void		julia_escape(t_data *data);
 #endif //FRACTOL_FRACTOL_H
