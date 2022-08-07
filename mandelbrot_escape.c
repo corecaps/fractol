@@ -66,17 +66,17 @@ void mandelbrot_escape(t_data *data)
 	int 		color;
 
 	y = 0;
-	while (y++ < data->size_y -1)
+	while (y++ < data->size_y - 1)
 	{
 		x = 0;
-		while (x++ < data->size_x -1 )
+		while (x++ < data->size_x - 1)
 		{
-			c = warp_coord_to_complex(x,y,data);
+			c = warp_coord_to_complex(x, y, data);
             if (is_in_cardiod(c) == 0)
             	color = calc_escape_value(data, c, 0);
 			else
             	color = data->max_iter;
-			put_pixel_2_img(data->img_buffer,x,y,get_color(data, color));
+			put_pixel_2_img(data->img_buffer, x, y, get_color(data, color));
 		}
 	}
 }

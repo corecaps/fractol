@@ -46,7 +46,7 @@ int mouse_events(int button, int x, int y, t_data *data)
     {
 		data->zoom_factor_x *= 0.90;
 		data->zoom_factor_y *= 0.90;
-		if (data->max_iter < MAX_ITER *  1000)
+		if (data->max_iter < MAX_ITER *  500)
 			data->max_iter += 2;
 		update_coord(data);
 	}

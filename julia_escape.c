@@ -14,7 +14,7 @@
 
 t_complex julia_anim(t_data *data, t_complex *c)
 {
-	(*c).r += 0.01; // TODO move animation code to a function who handles all animations
+	(*c).r += 0.01; //TODO Improve animation using sin
 	if ((*c).r >= 1.0)
 	{
 		(*c).r = -2.0;
@@ -40,26 +40,25 @@ static int calc_escape(const t_data *data, t_complex c, t_complex point)
 }
 static int get_color(const t_data *data, int iter)
 {
-	int color;
 	if (iter <= 2)
 		iter = 2;
 	if (iter == data->max_iter)
 		iter = 0;
 	if (iter > 0)
-		color = hsv_to_rgb((iter * 360 )/ data->max_iter,100,(log(iter) * 100)/ log(data->max_iter));
+		iter = hsv_to_rgb((iter * 360 )/ data->max_iter,100,(log(iter) * 100)/ log(data->max_iter));
 	else
-		color = 0;
-	return color;
+		iter = 0;
+	return iter;
 }
 
 void julia_escape(t_data *data)
 {
 	static t_complex	c = {.i = 0,.r = -2};
-	int 		x;
-	int 		y;
-	int 		color;
+	int 				x;
+	int 				y;
+	int 				color;
 
-	c = julia_anim(data, &c);
+	c = julia_anim(data, &c); //TODO  move static and call to anim function in render hook
 	y = 0;
 	while (y ++ < data->size_y -1)
 	{
