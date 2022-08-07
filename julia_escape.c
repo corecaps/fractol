@@ -21,7 +21,7 @@ void julia_escape(t_data *data)
 	int 		y;
 	int 		iter;
 	int 		color;
-	c.r += 0.01;
+	c.r += 0.01; // TODO move animation code to a function who handles all animations
 	if (c.r >= 1.0)
 	{
 		c.r = -2.0;

@@ -48,7 +48,6 @@ int rgb_to_mlx_color(int red, int green,int blue)
 int	hsv_to_rgb(int hue, int sat, int value)
 {
 	double	x;
-	//double 	m;
 	double	c;
 	int		red;
 	int 	green;
@@ -57,11 +56,9 @@ int	hsv_to_rgb(int hue, int sat, int value)
 	double 	g;
 	double	b;
 
-	(void) value;
-	(void) sat;
 	c = ((double)value / 100) * ((double)sat / 100);
 	x = c * (1 - abs((hue / 60) % 2) - 1);
-	//m = 1.0; //((double) value / 100) - c;
+	// TODO Refactoring
 	if (hue >= 0 && hue < 60)
 	{
 		r = c;
@@ -71,7 +68,7 @@ int	hsv_to_rgb(int hue, int sat, int value)
 	else if (hue >= 60 && hue < 120)
 	{
 		r = x;
-		g =c;
+		g = c;
 		b = 0;
 	}
 	else if (hue >= 120 && hue < 180)
@@ -108,6 +105,7 @@ int	render(t_data *data)
 {
 	if (data->redraw == 1)
 	{
+		data->redraw = 0;
 		clear_buffer(data);
         (*data->algorithm)(data);
 		mlx_put_image_to_window(data->mlx,
