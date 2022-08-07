@@ -43,7 +43,7 @@ void mandelbrot_escape(t_data *data)
             tmp = (((4.0L * (c.r * c.r))-(2.0L*c.r)+(1.0L/4.0L))) + (c.i * c.i);
             if (tmp * (tmp + (c.r - (1.0L / 4.0L))) > ((c.i*c.i) / 4.0L))
             {
-                while ((point.r * point.r + point.i * point.i <= 2) && (iter < MAX_ITER))
+                while ((point.r * point.r + point.i * point.i <= 2) && (iter < data->max_iter))
                 {
                     tmp = point.r * point.r - point.i * point.i + c.r;
                     point.i = 2 * point.r * point.i + c.i;
@@ -52,14 +52,14 @@ void mandelbrot_escape(t_data *data)
                 }
             } else
             {
-                iter = MAX_ITER;
+                iter = data->max_iter;
             }
 			if (iter <= 2)
 				iter = 2;
-			if (iter == MAX_ITER)
+			if (iter == data->max_iter)
 				iter = 0;
-			if (iter > 0)
-				color = hsv_to_rgb((iter * 360 )/ MAX_ITER,100,(log(iter) * 100)/ log(MAX_ITER));
+			if (iter > 0) // TODO implement color animation with static offset to hue
+				color = hsv_to_rgb((iter * 360 )/ data->max_iter,100,(int)round((log(iter) * 100)/ log(data->max_iter)));
 			else
 				color = 0;
 			put_pixel_2_img(data->img_buffer,x,y,color);

@@ -40,6 +40,9 @@ int key_pressed(int keycode, t_data *data)
     {
         mlx_destroy_window(data->mlx,data->mlx_win);
     }
+	// TODO SPACE Start Stop animation
+	// TODO Key to inc max_iter
+	// TODO Key to dec max_iter
     return (0);
 }
 
@@ -52,16 +55,21 @@ int mouse_events(int button, int x, int y, t_data *data)
 	data->center_y = (data->center_y + new_center.i) / 2;
     if (button == 4)
     {
-		data->zoom_factor_x *= 0.95;
-		data->zoom_factor_y *= 0.95;
+		data->zoom_factor_x *= 0.90;
+		data->zoom_factor_y *= 0.90;
+		if (data->max_iter < MAX_ITER *  1000)
+			data->max_iter += 2;
 		update_coord(data);
 	}
     else if (button == 5)
     {
-		data->zoom_factor_x *= 1.05;
-		data->zoom_factor_y *= 1.05;
+		data->zoom_factor_x *= 1.1;
+		data->zoom_factor_y *= 1.1;
+		if (data->max_iter > MAX_ITER)
+			data->max_iter -= 2;
 		update_coord(data);
-    }
+	}
+	// TODO Click when julia set c cplx number
     return (0);
 }
 

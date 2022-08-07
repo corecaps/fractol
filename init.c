@@ -77,6 +77,7 @@ void init_data(t_data *data)
 	data->mlx = mlx_init();
 	data->size_x = DEFAULT_X;
 	data->size_y = DEFAULT_Y;
+	// TODO use update coord to limit func size
 	data->start_i = -1.13;
 	data->stop_i = 1.13;
 	data->start_r = -1.7;
@@ -89,6 +90,7 @@ void init_data(t_data *data)
 	data->zoom_factor_y = data->cplx_size_y /data->size_y;
 	data->redraw = 1;
     data->algorithm = NULL;
+	data->max_iter = MAX_ITER;
     get_args(data);
 	data->mlx_win = mlx_new_window(data->mlx, data->size_x+1, data->size_y+1,
 								   "fractol");

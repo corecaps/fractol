@@ -36,7 +36,7 @@ void julia_escape(t_data *data)
 		{
 			point = warp_coord_to_complex(x,y,data);
 			iter = 0;
-            while ((point.r * point.r + point.i * point.i <= 4) && (iter < MAX_ITER))
+            while ((point.r * point.r + point.i * point.i <= 4) && (iter < data->max_iter))
                 {
                     tmp = point.r * point.r - point.i * point.i + c.r;
                     point.i = 2 * point.r * point.i + c.i;
@@ -45,10 +45,10 @@ void julia_escape(t_data *data)
                 }
 			if (iter <= 2)
 				iter = 2;
-			if (iter == MAX_ITER)
+			if (iter == data->max_iter)
 				iter = 0;
 			if (iter > 0)
-				color = hsv_to_rgb((iter * 360 )/ MAX_ITER,100,(log(iter) * 100)/ log(MAX_ITER));
+				color = hsv_to_rgb((iter * 360 )/ data->max_iter,100,(log(iter) * 100)/ log(data->max_iter));
 			else
 				color = 0;
 			put_pixel_2_img(data->img_buffer,x,y,color);

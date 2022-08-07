@@ -54,6 +54,7 @@ typedef struct s_data
 	long double	zoom_factor_x;
 	long double	zoom_factor_y;
 	int 		redraw;
+	int			max_iter;
     void        (*algorithm)(struct s_data *);
 }t_data;
 
