@@ -12,7 +12,7 @@
 
 NAME = fractol
 CURRENT_DIR = $(shell pwd)
-CC = gcc
+CC = clang
 CFLAGS = -Wall -Wextra -Werror -g -c
 
 INC = -Iminilibx-linux/

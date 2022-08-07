@@ -12,11 +12,11 @@
 
 #include "fractol.h"
 
-int get_color(const t_data *data, int iter)
+static int get_color(const t_data *data, int iter)
 {
 	int color;
-	if (iter <= 2)
-		iter = 2;
+	if (iter <= 3)
+		iter = 3;
 	if (iter == data->max_iter)
 		iter = 0;
 	if (iter > 0) // TODO implement color animation with static offset to hue
@@ -26,7 +26,7 @@ int get_color(const t_data *data, int iter)
 	return color;
 }
 
-int calc_escape_value(const t_data *data, t_complex c, int iter)
+static int calc_escape_value(const t_data *data, t_complex c, int iter)
 {
 	long double	tmp;
 	t_complex p = c;
@@ -39,6 +39,7 @@ int calc_escape_value(const t_data *data, t_complex c, int iter)
 	}
 	return iter;
 }
+
 t_complex warp_coord_to_complex(int x, int y, t_data *data)
 {
 	t_complex point;
@@ -47,7 +48,8 @@ t_complex warp_coord_to_complex(int x, int y, t_data *data)
 	point.i = data->start_i + ((long double) (y) * (data->stop_i - data->start_i)) / data->size_y;
 	return (point);
 }
-int is_in_cardiod(t_complex c)
+
+static int is_in_cardiod(t_complex c)
 {
 	long double	tmp;
 	tmp = (((4.0L * (c.r * c.r))-(2.0L*c.r)+(1.0L/4.0L))) + (c.i * c.i);
@@ -55,6 +57,7 @@ int is_in_cardiod(t_complex c)
 		return 0;
 	else return 1;
 }
+
 void mandelbrot_escape(t_data *data)
 {
 	t_complex	c;
@@ -69,13 +72,11 @@ void mandelbrot_escape(t_data *data)
 		while (x++ < data->size_x -1 )
 		{
 			c = warp_coord_to_complex(x,y,data);
-			color = 0;
             if (is_in_cardiod(c) == 0)
-            	color = calc_escape_value(data, c, color);
+            	color = calc_escape_value(data, c, 0);
 			else
             	color = data->max_iter;
-            color = get_color(data, color);
-			put_pixel_2_img(data->img_buffer,x,y,color);
+			put_pixel_2_img(data->img_buffer,x,y,get_color(data, color));
 		}
 	}
 }

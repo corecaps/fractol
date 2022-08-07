@@ -17,29 +17,18 @@
 int key_pressed(int keycode, t_data *data)
 {
     if (keycode == KEY_UP)
-    {
         data->center_y -= data->zoom_factor_y * 4;
-		update_coord(data);
-    }
     else if (keycode == KEY_DOWN)
-    {
         data->center_y += data->zoom_factor_y * 4;
-		update_coord(data);
-    }
     else if (keycode == KEY_LEFT)
-    {
         data->center_x -= data->zoom_factor_x * 4;
-		update_coord(data);
-    }
     else if (keycode == KEY_RIGHT)
-    {
         data->center_x += data->zoom_factor_x * 4;
-		update_coord(data);
-    }
     else if (keycode == KEY_ESC)
     {
         mlx_destroy_window(data->mlx,data->mlx_win);
     }
+	update_coord(data);
 	// TODO SPACE Start Stop animation
 	// TODO Key to inc max_iter
 	// TODO Key to dec max_iter

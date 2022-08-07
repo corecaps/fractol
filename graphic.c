@@ -89,7 +89,7 @@ int	hsv_to_rgb(int hue, int sat, int value)
 		g = 0;
 		b = c;
 	}
-	else if (hue >= 300 && hue <= 360)
+	else
 	{
 		r = c;
 		g = 0;

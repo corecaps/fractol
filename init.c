@@ -13,6 +13,28 @@
 #include "fractol.h"
 #include <string.h>
 
+void init_win(t_data *data)
+{
+	data->mlx_win = mlx_new_window(data->mlx, data->size_x + 1, data->size_y + 1,
+								   "fractol");
+	data->img_buffer->img = mlx_new_image(data->mlx,
+										  data->size_x + 1,
+										  data->size_y + 1);
+	data->img_buffer->address = mlx_get_data_addr(data->img_buffer->img,
+												  &data->img_buffer->bit_per_pixel,
+												  &data->img_buffer->line_length,
+												  &data->img_buffer->endian);
+}
+
+
+void print_usage(char **argv)
+{
+	printf("Usage:\n\t %s [options] fractal_type\n", argv[0]);
+	printf("fractal_type :\n\tmandelbrot\n\tjulia\n");
+	printf("Options :\n\t-s size\toverride the default windows size to size\n");
+	exit(1);
+}
+
 void	get_args(t_data *data)
 {
     int argp;
@@ -48,12 +70,10 @@ void	get_args(t_data *data)
     }
     if (data->algorithm == NULL)
     {
-        printf("Usage:\n\t %s [options] fractal_type\n",argv[0]);
-        printf("fractal_type :\n\tmandelbrot\n\tjulia\n");
-        printf("Options :\n\t-s size\toverride the default windows size to size\n");
-        exit(1);
-    }
+		print_usage(argv);
+	}
 }
+
 
 t_data *alloc_mem()
 {
@@ -92,15 +112,7 @@ void init_data(t_data *data)
     data->algorithm = NULL;
 	data->max_iter = MAX_ITER;
     get_args(data);
-	data->mlx_win = mlx_new_window(data->mlx, data->size_x+1, data->size_y+1,
-								   "fractol");
-	data->img_buffer->img = mlx_new_image(data->mlx,
-										  data->size_x + 1,
-										  data->size_y + 1);
-	data->img_buffer->address = mlx_get_data_addr(data->img_buffer->img,
-												  &data->img_buffer->bit_per_pixel,
-												  &data->img_buffer->line_length,
-												  &data->img_buffer->endian);
+	init_win(data);
 }
 
 t_data *main_init(int argc, char **argv)
