@@ -38,18 +38,6 @@ static int calc_escape(const t_data *data, t_complex c, t_complex point)
 	}
 	return color;
 }
-static int get_color(const t_data *data, int iter)
-{
-	if (iter <= 2)
-		iter = 2;
-	if (iter == data->max_iter)
-		iter = 0;
-	if (iter > 0)
-		iter = hsv_to_rgb((iter * 360 )/ data->max_iter,100,(log(iter) * 100)/ log(data->max_iter));
-	else
-		iter = 0;
-	return iter;
-}
 
 void julia_escape(t_data *data)
 {

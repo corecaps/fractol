@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-static int get_color(const t_data *data, int iter)
+int get_color(const t_data *data, int iter)
 {
 	int color;
 	if (iter <= 3)
@@ -26,9 +26,12 @@ static int get_color(const t_data *data, int iter)
 	return color;
 }
 
-static int calc_escape_value(const t_data *data, t_complex c, int iter)
+static int calc_escape_value(const t_data *data, t_complex c)
 {
+	int 		iter;
 	long double	tmp;
+
+	iter = 0;
 	t_complex p = c;
 	while ((p.r * p.r + p.i * p.i <= 2) && (iter < data->max_iter))
 	{
@@ -73,7 +76,7 @@ void mandelbrot_escape(t_data *data)
 		{
 			c = warp_coord_to_complex(x, y, data);
             if (is_in_cardiod(c) == 0)
-            	color = calc_escape_value(data, c, 0);
+            	color = calc_escape_value(data, c);
 			else
             	color = data->max_iter;
 			put_pixel_2_img(data->img_buffer, x, y, get_color(data, color));

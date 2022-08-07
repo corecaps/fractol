@@ -12,8 +12,6 @@
 
 #include "fractol.h"
 
-
-
 int key_pressed(int keycode, t_data *data)
 {
     if (keycode == KEY_UP)
@@ -32,6 +30,7 @@ int key_pressed(int keycode, t_data *data)
 	// TODO SPACE Start Stop animation
 	// TODO Key to inc max_iter
 	// TODO Key to dec max_iter
+	// TODO Keys to activate deactivate animation function
     return (0);
 }
 

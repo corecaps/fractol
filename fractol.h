@@ -62,8 +62,9 @@ void		put_pixel_2_img(t_buffer *img,int x, int y, int color);
 void		mandelbrot_escape(t_data *data);
 int			key_pressed(int keycode, t_data *data);
 int			mouse_events(int button, int x, int y, t_data *data);
-int			rgb_to_mlx_color(int red, int green,int blue);
+int			get_mlx_color(double red, double green, double blue);
 int			hsv_to_rgb(int hue, int sat, int value);
 void		update_coord(t_data *data);
 void		julia_escape(t_data *data);
+int			get_color(const t_data *data, int iter);
 #endif

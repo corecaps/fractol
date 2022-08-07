@@ -31,74 +31,45 @@ void clear_buffer(t_data *data)
 		x = 0;
 		while (x < data->size_x)
 		{
-			put_pixel_2_img(data->img_buffer,x,y,0xffffff);
+			put_pixel_2_img(data->img_buffer,x,y,0);
 			x ++;
 		}
 		y ++;
 	}
 }
-int rgb_to_mlx_color(int red, int green,int blue)
+int get_mlx_color(double red, double green, double blue)
 {
-	int	color;
+	int	r;
+	int g;
+	int b;
 
-	color = red * 0x10000 + green * 0x100 + blue;
-	return (color);
+	r = (int) round(red  * 255);
+	g = (int) round(green  * 255);
+	b = (int) round(blue * 255);
+	return (r * 0x10000 + g * 0x100 + b);
 }
 
 int	hsv_to_rgb(int hue, int sat, int value)
 {
 	double	x;
 	double	c;
-	int		red;
-	int 	green;
-	int 	blue;
-	double 	r;
-	double 	g;
-	double	b;
+	int 	color;
 
 	c = ((double)value / 100) * ((double)sat / 100);
 	x = c * (1 - abs((hue / 60) % 2) - 1);
-	// TODO Refactoring
 	if (hue >= 0 && hue < 60)
-	{
-		r = c;
-		g = x;
-		b = 0;
-	}
+		color = get_mlx_color(c, x, 0);
 	else if (hue >= 60 && hue < 120)
-	{
-		r = x;
-		g = c;
-		b = 0;
-	}
+		color = get_mlx_color(x, c, 0);
 	else if (hue >= 120 && hue < 180)
-	{
-		r = 0;
-		g = c;
-		b = x;
-	}
+		color = get_mlx_color(0, c, x);
 	else if (hue >= 180 && hue < 240)
-	{
-		r = 0;
-		g = x;
-		b = c;
-	}
+		color = get_mlx_color(0, x, c);
 	else if (hue >= 240 && hue < 300)
-	{
-		r = x;
-		g = 0;
-		b = c;
-	}
+		color = get_mlx_color(x, 0, c);
 	else
-	{
-		r = c;
-		g = 0;
-		b = x;
-	}
-	red = (int) round(r  * 255);
-	green = (int) round(g  * 255);
-	blue = (int) round(b * 255);
-	return (rgb_to_mlx_color(red,green,blue));
+		color = get_mlx_color(c, 0, x);
+	return (color);
 }
 
 int	render(t_data *data)
@@ -107,7 +78,9 @@ int	render(t_data *data)
 	{
 		data->redraw = 0;
 		clear_buffer(data);
-        (*data->algorithm)(data);
+		// TODO array of animation function
+        if (data->algorithm != NULL)
+			(*data->algorithm)(data);
 		mlx_put_image_to_window(data->mlx,
 								data->mlx_win,
 								data->img_buffer->img,
