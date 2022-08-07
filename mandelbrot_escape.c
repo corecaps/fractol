@@ -12,6 +12,33 @@
 
 #include "fractol.h"
 
+int get_color(const t_data *data, int iter)
+{
+	int color;
+	if (iter <= 2)
+		iter = 2;
+	if (iter == data->max_iter)
+		iter = 0;
+	if (iter > 0) // TODO implement color animation with static offset to hue
+		color = hsv_to_rgb((iter * 360 )/ data->max_iter,100,(int)round((log(iter) * 100)/ log(data->max_iter)));
+	else
+		color = 0;
+	return color;
+}
+
+int calc_escape_value(const t_data *data, t_complex c, int iter)
+{
+	long double	tmp;
+	t_complex p = c;
+	while ((p.r * p.r + p.i * p.i <= 2) && (iter < data->max_iter))
+	{
+		tmp = p.r * p.r - p.i * p.i + c.r;
+		p.i = 2 * p.r * p.i + c.i;
+		p.r = tmp;
+		iter++;
+	}
+	return iter;
+}
 t_complex warp_coord_to_complex(int x, int y, t_data *data)
 {
 	t_complex point;
@@ -20,51 +47,35 @@ t_complex warp_coord_to_complex(int x, int y, t_data *data)
 	point.i = data->start_i + ((long double) (y) * (data->stop_i - data->start_i)) / data->size_y;
 	return (point);
 }
-
+int is_in_cardiod(t_complex c)
+{
+	long double	tmp;
+	tmp = (((4.0L * (c.r * c.r))-(2.0L*c.r)+(1.0L/4.0L))) + (c.i * c.i);
+	if (tmp * (tmp + (c.r - (1.0L / 4.0L))) > ((c.i*c.i) / 4.0L))
+		return 0;
+	else return 1;
+}
 void mandelbrot_escape(t_data *data)
 {
 	t_complex	c;
-	t_complex 	point;
-	long double	tmp;
 	int 		x;
 	int 		y;
-	int 		iter;
 	int 		color;
 
 	y = 0;
-	while (y < data->size_y -1)
+	while (y++ < data->size_y -1)
 	{
 		x = 0;
-		while (x < data->size_x -1 )
+		while (x++ < data->size_x -1 )
 		{
 			c = warp_coord_to_complex(x,y,data);
-			point = c;
-			iter = 0;
-            tmp = (((4.0L * (c.r * c.r))-(2.0L*c.r)+(1.0L/4.0L))) + (c.i * c.i);
-            if (tmp * (tmp + (c.r - (1.0L / 4.0L))) > ((c.i*c.i) / 4.0L))
-            {
-                while ((point.r * point.r + point.i * point.i <= 2) && (iter < data->max_iter))
-                {
-                    tmp = point.r * point.r - point.i * point.i + c.r;
-                    point.i = 2 * point.r * point.i + c.i;
-                    point.r = tmp;
-                    iter++;
-                }
-            } else
-            {
-                iter = data->max_iter;
-            }
-			if (iter <= 2)
-				iter = 2;
-			if (iter == data->max_iter)
-				iter = 0;
-			if (iter > 0) // TODO implement color animation with static offset to hue
-				color = hsv_to_rgb((iter * 360 )/ data->max_iter,100,(int)round((log(iter) * 100)/ log(data->max_iter)));
+			color = 0;
+            if (is_in_cardiod(c) == 0)
+            	color = calc_escape_value(data, c, color);
 			else
-				color = 0;
+            	color = data->max_iter;
+            color = get_color(data, color);
 			put_pixel_2_img(data->img_buffer,x,y,color);
-			x ++;
 		}
-		y ++;
 	}
 }
