@@ -18,6 +18,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include "config.h"
+
 typedef struct s_complex
 {
 	long double r;
@@ -50,6 +51,8 @@ typedef struct s_data
 	long double	center_y;
 	long double	zoom_factor_x;
 	long double	zoom_factor_y;
+	t_complex	julia_c;
+	int 		color_offset;
 	int 		redraw;
 	int			max_iter;
     void        (*algorithm)(struct s_data *);
@@ -67,4 +70,6 @@ int			hsv_to_rgb(int hue, int sat, int value);
 void		update_coord(t_data *data);
 void		julia_escape(t_data *data);
 int			get_color(const t_data *data, int iter);
+char		*ft_itoa(int n);
+t_complex	julia_anim(t_data *data, t_complex *c);
 #endif

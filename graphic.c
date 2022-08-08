@@ -12,7 +12,9 @@
 
 #include "fractol.h"
 
-void put_pixel_2_img(t_buffer *img,int x, int y, int color)
+void ui(t_data *data);
+
+void put_pixel_2_img(t_buffer *img, int x, int y, int color)
 {
 	char *dest;
 
@@ -79,14 +81,34 @@ int	render(t_data *data)
 		data->redraw = 0;
 		clear_buffer(data);
 		// TODO array of animation function
+		if (data->color_offset < data->max_iter)
+			data->color_offset += 1;
+    	else
+			data->color_offset = 0;
+		data->julia_c = julia_anim(data, &data->julia_c);
         if (data->algorithm != NULL)
 			(*data->algorithm)(data);
 		mlx_put_image_to_window(data->mlx,
 								data->mlx_win,
 								data->img_buffer->img,
 								0, 0);
-		// TODO putstring with current param
+		ui(data);
 		// TODO implement ITOA
 	}
 	return (0);
+}
+
+void ui(t_data *data)
+{
+	char *buf;
+	mlx_string_put(data->mlx, data->mlx_win, 10, 10, 0xffffff, "jgarcia's FRACTOL");
+	mlx_string_put(data->mlx,data->mlx_win,10,25,0xffffff,"press ESC to exit");
+	buf= ft_itoa(data->max_iter);
+	mlx_string_put(data->mlx,data->mlx_win,10,40,0xffffff,"iter :");
+	mlx_string_put(data->mlx,data->mlx_win,50,40,0xffffff,buf);
+	free(buf);
+	buf = ft_itoa((int)round((data->size_x / data->cplx_size_x) / 100));// TODO putstring with current param
+	mlx_string_put(data->mlx,data->mlx_win,70,40,0xffffff,"zoom :");
+	mlx_string_put(data->mlx,data->mlx_win,120,40,0xffffff,buf);
+	free(buf);
 }

@@ -39,23 +39,29 @@ int mouse_events(int button, int x, int y, t_data *data)
 	t_complex	new_center;
 
 	new_center = warp_coord_to_complex(x,y,data);
-	data->center_x = (data->center_x + new_center.r) / 2;
-	data->center_y = (data->center_y + new_center.i) / 2;
     if (button == 4)
     {
-		data->zoom_factor_x *= 0.90;
-		data->zoom_factor_y *= 0.90;
-		if (data->max_iter < MAX_ITER *  500)
+		data->center_x = (data->center_x + new_center.r) / 2;
+		data->center_y = (data->center_y + new_center.i) / 2;
+		data->zoom_factor_x *= (1 - (ZOOM / 100));
+		data->zoom_factor_y *= (1 - (ZOOM / 100));
+		if (data->max_iter < MAX_ITER *  MAX_MAX_ITER)
 			data->max_iter += 2;
 		update_coord(data);
 	}
     else if (button == 5)
     {
-		data->zoom_factor_x *= 1.1;
-		data->zoom_factor_y *= 1.1;
+		data->center_x = (data->center_x + new_center.r) / 2;
+		data->center_y = (data->center_y + new_center.i) / 2;
+		data->zoom_factor_x *= (1 + (ZOOM / 100));
+		data->zoom_factor_y *= (1 + (ZOOM / 100));
 		if (data->max_iter > MAX_ITER)
 			data->max_iter -= 2;
 		update_coord(data);
+	}
+	else if (button == 1)
+	{
+		data->julia_c = new_center;
 	}
 	// TODO Click when julia set c cplx number
     return (0);

@@ -14,7 +14,9 @@
 #define FRACTOL_CONFIG_H
 # define DEFAULT_X 900
 # define DEFAULT_Y 900
+# define ZOOM 8.0
 # define MAX_ITER 30
+# define MAX_MAX_ITER 500
 # define KEY_UP 65362
 # define KEY_DOWN 65364
 # define KEY_LEFT 65361

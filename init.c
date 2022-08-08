@@ -63,6 +63,7 @@ void	get_args(t_data *data)
 			else if (strcmp(argv[argp], "julia") == 0) // TODO : utiliser ft_printf
 			{
 				data->algorithm = julia_escape;
+				data->max_iter = 90;
 				break;
 			}
             argp ++;
@@ -111,6 +112,7 @@ void init_data(t_data *data)
 	data->redraw = 1;
     data->algorithm = NULL;
 	data->max_iter = MAX_ITER;
+	data->color_offset = 0;
     get_args(data);
 	init_win(data);
 }

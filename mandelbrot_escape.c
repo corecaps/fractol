@@ -19,20 +19,27 @@ int get_color(const t_data *data, int iter)
 		iter = 3;
 	if (iter == data->max_iter)
 		iter = 0;
-	if (iter > 0) // TODO implement color animation with static offset to hue
-		color = hsv_to_rgb((iter * 360 )/ data->max_iter,100,(int)round((log(iter) * 100)/ log(data->max_iter)));
+	if (iter > 0)
+	{
+
+		color = hsv_to_rgb((((iter + data->color_offset) % data->max_iter) * 360) / data->max_iter,
+						   100,
+						   (int) round((log(iter) * 100)
+									   / log(data->max_iter)));
+	}
 	else
 		color = 0;
 	return color;
 }
 
-static int calc_escape_value(const t_data *data, t_complex c)
+static int calc_escape_value(t_data *data, t_complex c)
 {
 	int 		iter;
 	long double	tmp;
+	t_complex	p;
 
 	iter = 0;
-	t_complex p = c;
+	p = c;
 	while ((p.r * p.r + p.i * p.i <= 2) && (iter < data->max_iter))
 	{
 		tmp = p.r * p.r - p.i * p.i + c.r;
@@ -47,8 +54,10 @@ t_complex warp_coord_to_complex(int x, int y, t_data *data)
 {
 	t_complex point;
 
-	point.r = data->start_r + ((long double) (x) * (data->stop_r - data->start_r)) / data->size_x;
-	point.i = data->start_i + ((long double) (y) * (data->stop_i - data->start_i)) / data->size_y;
+	point.r = data->start_r +
+			((long double) (x) * (data->stop_r - data->start_r)) / data->size_x;
+	point.i = data->start_i +
+			((long double) (y) * (data->stop_i - data->start_i)) / data->size_y;
 	return (point);
 }
 
@@ -79,7 +88,8 @@ void mandelbrot_escape(t_data *data)
             	color = calc_escape_value(data, c);
 			else
             	color = data->max_iter;
-			put_pixel_2_img(data->img_buffer, x, y, get_color(data, color));
+			put_pixel_2_img(data->img_buffer, x, y,
+							get_color(data, color));
 		}
 	}
 }
