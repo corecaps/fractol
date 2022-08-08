@@ -66,6 +66,12 @@ void	get_args(t_data *data)
 				data->max_iter = 90;
 				break;
 			}
+			else if (strcmp(argv[argp], "burning") == 0) // TODO : utiliser ft_printf
+			{
+				data->algorithm = burning_escape;
+				data->max_iter = 100;
+				break;
+			}
             argp ++;
         }
     }

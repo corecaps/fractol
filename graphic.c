@@ -14,6 +14,8 @@
 
 void ui(t_data *data);
 
+void animations(t_data *data);
+
 void put_pixel_2_img(t_buffer *img, int x, int y, int color)
 {
 	char *dest;
@@ -81,12 +83,8 @@ int	render(t_data *data)
 		data->redraw = 0;
 		clear_buffer(data);
 		// TODO array of animation function
-		if (data->color_offset < data->max_iter)
-			data->color_offset += 1;
-    	else
-			data->color_offset = 0;
-		data->julia_c = julia_anim(data, &data->julia_c);
-        if (data->algorithm != NULL)
+		animations(data);
+		if (data->algorithm != NULL)
 			(*data->algorithm)(data);
 		mlx_put_image_to_window(data->mlx,
 								data->mlx_win,
@@ -96,6 +94,15 @@ int	render(t_data *data)
 		// TODO implement ITOA
 	}
 	return (0);
+}
+
+void animations(t_data *data)
+{
+	if (data->color_offset < data->max_iter)
+		data->color_offset += 1;
+	else
+		data->color_offset = 0;
+	data->julia_c = julia_anim(data, &data->julia_c);
 }
 
 void ui(t_data *data)
