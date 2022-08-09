@@ -1,12 +1,20 @@
-//
-// Created by corecaps on 08/08/22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/10 00:44:20 by jgarcia           #+#    #+#             */
+/*   Updated: 2022/08/10 00:45:06 by jgarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "fractol.h"
 
-static int      ft_int_dec_size(long int n)
+static int	ft_int_dec_size(long int n)
 {
-	int     size;
+	int	size;
 
 	size = 1;
 	while (n > 9)
@@ -17,18 +25,18 @@ static int      ft_int_dec_size(long int n)
 	return (size);
 }
 
-static void     ft_dectoascii(long int n, char *buf, size_t index)
+static void	ft_dectoascii(long int n, char *buf, size_t index)
 {
 	if (n > 9)
 		ft_dectoascii(n / 10, buf, index - 1);
 	buf[index] = (n % 10) + '0';
 }
 
-char    *ft_itoa(int n)
+char	*ft_itoa(int n)
 {
-	long long int   abs_n;
-	char                    *result;
-	size_t                  size;
+	long long int	abs_n;
+	char			*result;
+	size_t			size;
 
 	size = 0;
 	abs_n = (long) n;

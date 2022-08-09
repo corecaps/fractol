@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.h                                           :+:      :+:    :+:   */
+/*   mem_clean.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/27 12:39:18 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/09 23:59:40 by jgarcia          ###   ########.fr       */
+/*   Created: 2022/08/10 00:43:51 by jgarcia           #+#    #+#             */
+/*   Updated: 2022/08/10 00:44:13 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CONFIG_H
-# define CONFIG_H
-# define DEFAULT_X 900
-# define DEFAULT_Y 900
-# define ZOOM 8.0
-# define MAX_ITER 30
-# define MAX_MAX_ITER 500
-# define KEY_UP 65362
-# define KEY_DOWN 65364
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
-# define KEY_ESC 65307
-#endif
+#include "fractol.h"
+
+void	clean_exit(t_data *data)
+{
+	mlx_destroy_image(data->mlx, data->img_buffer->img);
+	mlx_destroy_display(data->mlx);
+	free(data->mlx);
+	free(data->img_buffer);
+	free(data);
+	exit(0);
+}

@@ -1,12 +1,22 @@
-//
-// Created by corecaps on 08/08/22.
-//
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   burning_escape.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/09 23:47:22 by jgarcia           #+#    #+#             */
+/*   Updated: 2022/08/09 23:58:23 by jgarcia          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
-static int calc_escape(t_data *data,t_complex p)
+
+static int	calc_escape(t_data *data, t_complex p)
 {
-	int iter;
-	long double tmp;
-	t_complex c;
+	int			iter;
+	long double	tmp;
+	t_complex	c;
 
 	iter = 0;
 	c = p;
@@ -17,13 +27,16 @@ static int calc_escape(t_data *data,t_complex p)
 		p.r = tmp;
 		iter ++;
 	}
-	return iter;
+	if (iter == data->max_iter)
+		return (0);
+	return (iter);
 }
-void burning_escape(t_data *data)
+
+void	burning_escape(t_data *data)
 {
-	int x;
-	int y;
-	int color;
+	int	x;
+	int	y;
+	int	color;
 
 	y = 0;
 	while (y ++ < data->size_y - 1)
@@ -31,8 +44,11 @@ void burning_escape(t_data *data)
 		x = 0;
 		while (x ++ < data->size_x - 1)
 		{
-			color = calc_escape(data, warp_coord_to_complex(x,y,data));
-			put_pixel_2_img(data->img_buffer,x,y, get_color(data,color));
+			color = calc_escape(data, warp_coord_to_complex(x, y, data));
+			color = (int)round(pow(color, 0.5) * 0xff
+					/ pow(data->max_iter, 0.5));
+			color = color * 0x10000;
+			put_pixel_2_img(data->img_buffer, x, y, color);
 		}
 	}
 }

@@ -6,7 +6,7 @@
 #    By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/22 17:57:00 by jgarcia           #+#    #+#              #
-#    Updated: 2022/07/22 17:58:07 by jgarcia          ###   ########.fr        #
+#    Updated: 2022/08/10 00:35:45 by jgarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ INC = -Iminilibx-linux/
 LINK = -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lz
 
 SRC = main.c graphic.c init.c mandelbrot_escape.c controls.c julia_escape.c utils.c \
-		burning_escape.c
+		burning_escape.c mem_clean.c
 
 OBJ = $(SRC:.c=.o)
 

@@ -6,12 +6,12 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 18:08:02 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/07/22 18:08:07 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/10 00:08:15 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_FRACTOL_H
-#define FRACTOL_FRACTOL_H
+#ifndef FRACTOL_H
+# define FRACTOL_H
 # include <mlx.h>
 # include <stdlib.h>
 # include <math.h>
@@ -21,26 +21,26 @@
 
 typedef struct s_complex
 {
-	long double r;
-	long double i;
-} t_complex;
+	long double	r;
+	long double	i;
+}	t_complex;
 typedef struct s_buffer
 {
 	void	*img;
-	char 	*address;
-	int 	bit_per_pixel;
-	int 	line_length;
-	int 	endian;
-} t_buffer;
+	char	*address;
+	int		bit_per_pixel;
+	int		line_length;
+	int		endian;
+}	t_buffer;
 typedef struct s_data
 {
-    int         argc;
-    char        **argv;
+	int			argc;
+	char		**argv;
 	void		*mlx;
 	void		*mlx_win;
 	t_buffer	*img_buffer;
-	int 		size_x;
-	int 		size_y;
+	int			size_x;
+	int			size_y;
 	long double	start_r;
 	long double	stop_r;
 	long double	start_i;
@@ -52,16 +52,17 @@ typedef struct s_data
 	long double	zoom_factor_x;
 	long double	zoom_factor_y;
 	t_complex	julia_c;
-	int 		color_offset;
-	int 		redraw;
+	int			color_offset;
+	int			redraw;
 	int			max_iter;
-    void        (*algorithm)(struct s_data *);
+	int			exit;
+	void		(*algorithm)(struct s_data *);
 }t_data;
 int			render(t_data *data);
 void		get_args(t_data *data);
 t_data		*main_init(int argc, char **argv);
 t_complex	warp_coord_to_complex(int x, int y, t_data *data);
-void		put_pixel_2_img(t_buffer *img,int x, int y, int color);
+void		put_pixel_2_img(t_buffer *img, int x, int y, int color);
 void		mandelbrot_escape(t_data *data);
 int			key_pressed(int keycode, t_data *data);
 int			mouse_events(int button, int x, int y, t_data *data);
@@ -72,5 +73,6 @@ void		julia_escape(t_data *data);
 int			get_color(const t_data *data, int iter);
 char		*ft_itoa(int n);
 t_complex	julia_anim(t_data *data, t_complex *c);
-void 		burning_escape(t_data *data);
+void		burning_escape(t_data *data);
+void		clean_exit(t_data *data);
 #endif
