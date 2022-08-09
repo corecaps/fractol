@@ -12,6 +12,13 @@
 
 #include "fractol.h"
 
+/*******************************************************************************
+ * calculate for the point p the number of iteration before the functions      *
+ * tend to infinity.                                                           *
+ * @return the number of iteration or 0 if the function remains stable for     *
+ * point p                                                                     *
+ ******************************************************************************/
+
 static int	calc_escape(t_data *data, t_complex p)
 {
 	int			iter;
@@ -31,6 +38,13 @@ static int	calc_escape(t_data *data, t_complex p)
 		return (0);
 	return (iter);
 }
+
+/*******************************************************************************
+ * go through every point in the image and calculate the value                 *
+ * if point is in the burning escape set pixel is set to black                 *
+ * if point is not in the set color in function of the iteration it took to    *
+ * determine point is not in set                                               *
+ ******************************************************************************/
 
 void	burning_escape(t_data *data)
 {

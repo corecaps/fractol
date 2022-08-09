@@ -12,6 +12,11 @@
 
 #include "fractol.h"
 
+/*******************************************************************************
+ * free every space still allocated on the heap                                *
+ * and exit with success                                                       *
+ ******************************************************************************/
+
 void	clean_exit(t_data *data)
 {
 	mlx_destroy_image(data->mlx, data->img_buffer->img);

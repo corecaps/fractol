@@ -16,6 +16,14 @@ void	ui(t_data *data);
 
 void	animations(t_data *data);
 
+/*******************************************************************************
+ * write the value of a pixel in a mlx image                                   *
+ * @param img data structure containing the image and its parameter            *
+ * @param x coordinate                                                         *
+ * @param y coordinate                                                         *
+ * @param color value of the pixel in one integer                              *
+ ******************************************************************************/
+
 void	put_pixel_2_img(t_buffer *img, int x, int y, int color)
 {
 	char	*dest;
@@ -23,6 +31,10 @@ void	put_pixel_2_img(t_buffer *img, int x, int y, int color)
 	dest = img->address + (y * img->line_length + x * (img->bit_per_pixel / 8));
 	*(unsigned int *)dest = color;
 }
+
+/*******************************************************************************
+ * reset all pixel of the mlx image to 0 (black)                               *
+ ******************************************************************************/
 
 void	clear_buffer(t_data *data)
 {
@@ -42,6 +54,11 @@ void	clear_buffer(t_data *data)
 	}
 }
 
+/*******************************************************************************
+ * translate double value (between 0.0 and 1.0) to a single color value int    *
+ * @return a valid mlx color value used by put pixel 2 img                     *
+ ******************************************************************************/
+
 int	get_mlx_color(double red, double green, double blue)
 {
 	int	r;
@@ -53,6 +70,12 @@ int	get_mlx_color(double red, double green, double blue)
 	b = (int) round(blue * 255);
 	return (r * 0x10000 + g * 0x100 + b);
 }
+
+/*******************************************************************************
+ * transform a color described by hue (in degre) sat (%) value(%) to rgb in    *
+ * single int                                                                  *
+ * @return a valid color that can be used by put pixel 2 img                   *
+ ******************************************************************************/
 
 int	hsv_to_rgb(int hue, int sat, int value)
 {
@@ -77,6 +100,12 @@ int	hsv_to_rgb(int hue, int sat, int value)
 	return (color);
 }
 
+/*******************************************************************************
+ * function called by mlx hook to render every frame                           *
+ * frame is rendered only if needed (data->redraw > 0)                         *
+ * and application not currently exiting (data->exit == 0)                     *
+ ******************************************************************************/
+
 int	render(t_data *data)
 {
 	if (data->redraw == 1 && data->exit == 0)
@@ -97,6 +126,10 @@ int	render(t_data *data)
 	return (0);
 }
 
+/*******************************************************************************
+ * update variable in data structure to handle animation parameters            *
+ ******************************************************************************/
+
 void	animations(t_data *data)
 {
 	if (data->color_offset < data->max_iter)
@@ -105,6 +138,10 @@ void	animations(t_data *data)
 		data->color_offset = 0;
 	data->julia_c = julia_anim(data, &data->julia_c);
 }
+
+/*******************************************************************************
+ * use mlx_string_put to display ui information                                *
+ ******************************************************************************/
 
 void	ui(t_data *data)
 {

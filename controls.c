@@ -12,6 +12,12 @@
 
 #include "fractol.h"
 
+/*******************************************************************************
+ * function is called via mlx hook
+ * keys affect the configuration of the simulation
+ * @return 0 in every cases
+ ******************************************************************************/
+
 int	key_pressed(int keycode, t_data *data)
 {
 	if (keycode == KEY_UP)
@@ -34,6 +40,12 @@ int	key_pressed(int keycode, t_data *data)
 	// TODO Keys to activate deactivate animation function
 	return (0);
 }
+
+/*******************************************************************************
+ * function called via mlx hook to handle mouse event                          *
+ * scrolling zoom into simulation                                              *
+ * left click set a new point for julia simulation                             *
+ ******************************************************************************/
 
 int	mouse_events(int button, int x, int y, t_data *data)
 {
@@ -66,6 +78,10 @@ int	mouse_events(int button, int x, int y, t_data *data)
 	}
 	return (0);
 }
+
+/*******************************************************************************
+ * update the pixel and complex coordinaete system                             *
+ ******************************************************************************/
 
 void	update_coord(t_data *data)
 {

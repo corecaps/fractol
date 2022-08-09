@@ -12,6 +12,12 @@
 
 #include "fractol.h"
 
+/*******************************************************************************
+ * ft_itoa util function to determine size of the string to be allocated       *
+ * @param n number to convert                                                  *
+ * @return size of the string                                                  *
+ ******************************************************************************/
+
 static int	ft_int_dec_size(long int n)
 {
 	int	size;
@@ -24,13 +30,24 @@ static int	ft_int_dec_size(long int n)
 	}
 	return (size);
 }
-
+/*******************************************************************************
+ * ft_itoa utils function
+ * convert a base 10 int  to corresponding ascii string                        *
+ * @param n int to convert                                                     *
+ * @param buf pointer to a heap allocated string of size + 1                   *
+ ******************************************************************************/
 static void	ft_dectoascii(long int n, char *buf, size_t index)
 {
 	if (n > 9)
 		ft_dectoascii(n / 10, buf, index - 1);
 	buf[index] = (n % 10) + '0';
 }
+
+/*******************************************************************************
+ * convert an int to a string                                                  *
+ * @param n number to convert into string                                      *
+ * @return a pointer to the string (heap allocated)                            *
+ ******************************************************************************/
 
 char	*ft_itoa(int n)
 {

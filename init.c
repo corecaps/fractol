@@ -13,6 +13,10 @@
 #include "fractol.h"
 #include <string.h>
 
+/*******************************************************************************
+ * initalize the window and image buffer                                       *
+ ******************************************************************************/
+
 void	init_win(t_data *data)
 {
 	data->mlx_win = mlx_new_window(data->mlx, data->size_x + 2,
@@ -26,6 +30,9 @@ void	init_win(t_data *data)
 			&data->img_buffer->line_length,
 			&data->img_buffer->endian);
 }
+/*******************************************************************************
+ * print help information if cli args are incorrect                            *
+ ******************************************************************************/
 
 void	print_usage(char **argv, t_data *data)
 {
@@ -36,6 +43,10 @@ void	print_usage(char **argv, t_data *data)
 	free(data);
 	exit(1);
 }
+
+/*******************************************************************************
+ * check cli arguments and save the simulation parameters in data structure    *
+ ******************************************************************************/
 
 void	get_args(t_data *data)
 {
@@ -99,6 +110,12 @@ void	get_args(t_data *data)
 	}
 }
 
+/*******************************************************************************
+ * allocate space on the heap for the data structure                           *
+ * @return NULL in case of allocation error otherwise a pointer to the data    *
+ * structure                                                                   *
+ ******************************************************************************/
+
 t_data	*alloc_mem(void)
 {
 	t_data	*data;
@@ -114,6 +131,11 @@ t_data	*alloc_mem(void)
 	}
 	return (data);
 }
+
+/*******************************************************************************
+ * initialize the data structure with defaults values                          *
+ * most of them are defined in config.h                                        *
+ ******************************************************************************/
 
 void	init_data(t_data *data)
 {
@@ -139,6 +161,12 @@ void	init_data(t_data *data)
 	data->mlx = mlx_init();
 	init_win(data);
 }
+
+/*******************************************************************************
+ * initialize the data structure, mlx library, application windows             *
+ * @return NULL in case of allocation error, otherwise a pointer to data       *
+ * structure                                                                   *
+ ******************************************************************************/
 
 t_data	*main_init(int argc, char **argv)
 {
