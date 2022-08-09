@@ -15,6 +15,7 @@
 /*******************************************************************************
  * function is called via mlx hook
  * keys affect the configuration of the simulation
+ * keycode value are defined in config.h
  * @return 0 in every cases
  ******************************************************************************/
 

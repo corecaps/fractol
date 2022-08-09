@@ -12,9 +12,27 @@
 
 #include "fractol.h"
 
-void	ui(t_data *data);
+/*******************************************************************************
+ * use mlx_string_put to display user_interface information                    *
+ ******************************************************************************/
 
-void	animations(t_data *data);
+void	user_interface(t_data *data)
+{
+	char	*buf;
+
+	mlx_string_put(data->mlx, data->mlx_win, 10, 10, 0xffffff,
+				   "jgarcia's FRACTOL");
+	mlx_string_put(data->mlx, data->mlx_win, 10, 25, 0xffffff,
+				   "press ESC to exit");
+	buf = ft_itoa(data->max_iter);
+	mlx_string_put(data->mlx, data->mlx_win, 10, 40, 0xffffff, "iter :");
+	mlx_string_put(data->mlx, data->mlx_win, 50, 40, 0xffffff, buf);
+	free(buf);
+	buf = ft_itoa((int)round((data->size_x / data->cplx_size_x) / 100));// TODO putstring with current param
+	mlx_string_put(data->mlx, data->mlx_win, 70, 40, 0xffffff, "zoom :");
+	mlx_string_put(data->mlx, data->mlx_win, 120, 40, 0xffffff, buf);
+	free(buf);
+}
 
 /*******************************************************************************
  * write the value of a pixel in a mlx image                                   *
@@ -54,51 +72,6 @@ void	clear_buffer(t_data *data)
 	}
 }
 
-/*******************************************************************************
- * translate double value (between 0.0 and 1.0) to a single color value int    *
- * @return a valid mlx color value used by put pixel 2 img                     *
- ******************************************************************************/
-
-int	get_mlx_color(double red, double green, double blue)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = (int) round(red * 255);
-	g = (int) round(green * 255);
-	b = (int) round(blue * 255);
-	return (r * 0x10000 + g * 0x100 + b);
-}
-
-/*******************************************************************************
- * transform a color described by hue (in degre) sat (%) value(%) to rgb in    *
- * single int                                                                  *
- * @return a valid color that can be used by put pixel 2 img                   *
- ******************************************************************************/
-
-int	hsv_to_rgb(int hue, int sat, int value)
-{
-	double	x;
-	double	c;
-	int		color;
-
-	c = ((double)value / 100) * ((double)sat / 100);
-	x = c * (1 - abs((hue / 60) % 2) - 1);
-	if (hue >= 0 && hue < 60)
-		color = get_mlx_color(c, x, 0);
-	else if (hue >= 60 && hue < 120)
-		color = get_mlx_color(x, c, 0);
-	else if (hue >= 120 && hue < 180)
-		color = get_mlx_color(0, c, x);
-	else if (hue >= 180 && hue < 240)
-		color = get_mlx_color(0, x, c);
-	else if (hue >= 240 && hue < 300)
-		color = get_mlx_color(x, 0, c);
-	else
-		color = get_mlx_color(c, 0, x);
-	return (color);
-}
 
 /*******************************************************************************
  * function called by mlx hook to render every frame                           *
@@ -120,43 +93,8 @@ int	render(t_data *data)
 			data->mlx_win,
 			data->img_buffer->img,
 			0, 0);
-		ui(data);
+		user_interface(data);
 		// TODO implement ITOA
 	}
 	return (0);
-}
-
-/*******************************************************************************
- * update variable in data structure to handle animation parameters            *
- ******************************************************************************/
-
-void	animations(t_data *data)
-{
-	if (data->color_offset < data->max_iter)
-		data->color_offset += 1;
-	else
-		data->color_offset = 0;
-	data->julia_c = julia_anim(data, &data->julia_c);
-}
-
-/*******************************************************************************
- * use mlx_string_put to display ui information                                *
- ******************************************************************************/
-
-void	ui(t_data *data)
-{
-	char	*buf;
-
-	mlx_string_put(data->mlx, data->mlx_win, 10, 10, 0xffffff,
-		"jgarcia's FRACTOL");
-	mlx_string_put(data->mlx, data->mlx_win, 10, 25, 0xffffff,
-		"press ESC to exit");
-	buf = ft_itoa(data->max_iter);
-	mlx_string_put(data->mlx, data->mlx_win, 10, 40, 0xffffff, "iter :");
-	mlx_string_put(data->mlx, data->mlx_win, 50, 40, 0xffffff, buf);
-	free(buf);
-	buf = ft_itoa((int)round((data->size_x / data->cplx_size_x) / 100));// TODO putstring with current param
-	mlx_string_put(data->mlx, data->mlx_win, 70, 40, 0xffffff, "zoom :");
-	mlx_string_put(data->mlx, data->mlx_win, 120, 40, 0xffffff, buf);
-	free(buf);
 }

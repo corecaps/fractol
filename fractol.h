@@ -73,6 +73,7 @@ void		julia_escape(t_data *data);
 int			get_color(const t_data *data, int iter);
 char		*ft_itoa(int n);
 t_complex	julia_anim(t_data *data, t_complex *c);
+void		animations(t_data *data);
 void		burning_escape(t_data *data);
 void		clean_exit(t_data *data);
 #endif

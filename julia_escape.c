@@ -12,21 +12,6 @@
 
 #include "fractol.h"
 
-t_complex	julia_anim(t_data *data, t_complex *c)
-{
-	static double	angle = 0.0;
-	static int		sens = 1;
-
-	if (angle > (2 * M_PI))
-		sens = -1;
-	else if (angle < 0)
-		sens = 1;
-	angle += sens * (M_PI / 157);
-	(*c).r = cos(angle);
-	(*c).i = sin(M_E * angle);
-	data->redraw = 1;
-	return (*c);
-}
 
 static int	calc_escape(t_data *data, t_complex c, t_complex p)
 {
