@@ -13,6 +13,23 @@
 #include "fractol.h"
 
 /*******************************************************************************
+ * map pixel coordinate to complex point coordinates                           *
+ ******************************************************************************/
+
+t_complex	warp_coord_to_complex(int x, int y, t_data *data)
+{
+	t_complex	point;
+
+	point.r = data->start_r
+			  + ((long double)(x * (data->stop_r - data->start_r)))
+				/ data->size_x;
+	point.i = data->start_i
+			  + ((long double)(y * (data->stop_i - data->start_i)))
+				/ data->size_y;
+	return (point);
+}
+
+/*******************************************************************************
  * ft_itoa util function to determine size of the string to be allocated       *
  * @param n number to convert                                                  *
  * @return size of the string                                                  *

@@ -12,6 +12,27 @@
 
 #include "fractol.h"
 
+int	get_color(const t_data *data, int iter)
+{
+	int	color;
+
+	if (iter <= 3)
+		iter = 3;
+	if (iter == data->max_iter)
+		iter = 0;
+	if (iter > 0)
+	{
+		color = hsv_to_rgb((((iter + data->color_offset) % data->max_iter)
+							* 360) / data->max_iter,
+						   100,
+						   (int) round((log(iter) * 100)
+									   / log(data->max_iter)));
+	}
+	else
+		color = 0;
+	return (color);
+}
+
 /*******************************************************************************
  * translate double value (between 0.0 and 1.0) to a single color value int    *
  * @return a valid mlx color value used by put pixel 2 img                     *

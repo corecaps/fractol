@@ -12,26 +12,10 @@
 
 #include "fractol.h"
 
-int	get_color(const t_data *data, int iter)
-{
-	int	color;
-
-	if (iter <= 3)
-		iter = 3;
-	if (iter == data->max_iter)
-		iter = 0;
-	if (iter > 0)
-	{
-		color = hsv_to_rgb((((iter + data->color_offset) % data->max_iter)
-					* 360) / data->max_iter,
-				100,
-				(int) round((log(iter) * 100)
-					/ log(data->max_iter)));
-	}
-	else
-		color = 0;
-	return (color);
-}
+/*******************************************************************************
+ * iterate mandelbrot function until it escape to infinity for point p         *
+ * @return number of iteration it took for function to break stability         *
+ ******************************************************************************/
 
 static int	calc_escape_value(t_data *data, t_complex c)
 {
@@ -51,18 +35,11 @@ static int	calc_escape_value(t_data *data, t_complex c)
 	return (iter);
 }
 
-t_complex	warp_coord_to_complex(int x, int y, t_data *data)
-{
-	t_complex	point;
-
-	point.r = data->start_r
-		+ ((long double)(x * (data->stop_r - data->start_r)))
-		/ data->size_x;
-	point.i = data->start_i
-		+ ((long double)(y * (data->stop_i - data->start_i)))
-		/ data->size_y;
-	return (point);
-}
+/*******************************************************************************
+ * optimisation : determine if the point c is in the first order cardiod of    *
+ * the mandelbrot set                                                          *
+ * @return 0 if not in first order cardioid 1 if in cardioid                   *
+ ******************************************************************************/
 
 static int	is_in_cardiod(t_complex c)
 {
@@ -74,6 +51,11 @@ static int	is_in_cardiod(t_complex c)
 	else
 		return (1);
 }
+
+/*******************************************************************************
+ * map each pixel to a point in the complex point determined by simulation     *
+ * parameters in data structure and check if the point is in mandelbrot set    *
+ ******************************************************************************/
 
 void	mandelbrot_escape(t_data *data)
 {
