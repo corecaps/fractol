@@ -36,6 +36,8 @@ static int	calc_escape(t_data *data, t_complex p)
 	}
 	if (iter == data->max_iter)
 		return (0);
+	else if (iter <=5)
+		return (5);
 	return (iter);
 }
 
@@ -59,9 +61,13 @@ void	burning_escape(t_data *data)
 		while (x ++ < data->size_x - 1)
 		{
 			color = calc_escape(data, warp_coord_to_complex(x, y, data));
-			color = (int)round(pow(color, 0.5) * 0xff
-					/ pow(data->max_iter, 0.5));
-			color = color * 0x10000;
+//			color = (int)round(pow(color, 0.5) * 0xff
+//					/ pow(data->max_iter, 0.5));
+//			color = color * 0x10000;
+			color = hsv_to_rgb(0,
+									   100,
+									   (int) round((pow(color,0.5) * 100)
+												   / pow(data->max_iter,0.5)),data->color_offset);
 			put_pixel_2_img(data->img_buffer, x, y, color);
 		}
 	}

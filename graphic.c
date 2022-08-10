@@ -19,6 +19,8 @@
 void	user_interface(t_data *data)
 {
 	char	*buf;
+	int		exp;
+
 
 	mlx_string_put(data->mlx, data->mlx_win, 10, 10, 0xffffff,
 				   "jgarcia's FRACTOL");
@@ -28,7 +30,8 @@ void	user_interface(t_data *data)
 	mlx_string_put(data->mlx, data->mlx_win, 10, 40, 0xffffff, "iter :");
 	mlx_string_put(data->mlx, data->mlx_win, 50, 40, 0xffffff, buf);
 	free(buf);
-	buf = ft_itoa((int)round((data->size_x / data->cplx_size_x) / 100));// TODO putstring with current param
+	frexp((double)data->zoom_factor_x,&exp);
+	buf = ft_itoa(-exp);
 	mlx_string_put(data->mlx, data->mlx_win, 70, 40, 0xffffff, "zoom :");
 	mlx_string_put(data->mlx, data->mlx_win, 120, 40, 0xffffff, buf);
 	free(buf);
@@ -83,9 +86,8 @@ int	render(t_data *data)
 {
 	if (data->redraw == 1 && data->exit == 0)
 	{
-		data->redraw = 1;
+		data->redraw = 0;
 		clear_buffer(data);
-		// TODO array of animation function
 		animations(data);
 		if (data->algorithm != NULL)
 			(*data->algorithm)(data);
@@ -94,7 +96,6 @@ int	render(t_data *data)
 			data->img_buffer->img,
 			0, 0);
 		user_interface(data);
-		// TODO implement ITOA
 	}
 	return (0);
 }

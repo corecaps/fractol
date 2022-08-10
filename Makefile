@@ -19,7 +19,7 @@ INC = -Iminilibx-linux/
 LINK = -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lz
 
 SRC = main.c graphic.c init.c mandelbrot_escape.c controls.c julia_escape.c utils.c \
-		burning_escape.c mem_clean.c color.c animations.c
+		burning_escape.c mem_clean.c color.c animations.c utils2.c
 
 OBJ = $(SRC:.c=.o)
 

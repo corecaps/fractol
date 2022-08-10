@@ -29,16 +29,20 @@ int	key_pressed(int keycode, t_data *data)
 		data->center_x -= data->zoom_factor_x * 4;
 	else if (keycode == KEY_RIGHT)
 		data->center_x += data->zoom_factor_x * 4;
+	else if (keycode == KEY_1)
+		data->anim ^= 1;
+	else if (keycode == KEY_2)
+		data->anim ^= 2;
+	else if (keycode == KEY_3)
+		data->anim ^= 4;
+	else if (keycode == KEY_SPACE)
+		data->anim = 0;
 	else if (keycode == KEY_ESC)
 	{
 		data->exit = 1;
 		mlx_destroy_window(data->mlx, data->mlx_win);
 	}
 	update_coord(data);
-	// TODO SPACE Start Stop animation
-	// TODO Key to inc max_iter
-	// TODO Key to dec max_iter
-	// TODO Keys to activate deactivate animation function
 	return (0);
 }
 
@@ -60,7 +64,9 @@ int	mouse_events(int button, int x, int y, t_data *data)
 		data->zoom_factor_x *= (1 - (ZOOM / 100));
 		data->zoom_factor_y *= (1 - (ZOOM / 100));
 		if (data->max_iter < MAX_ITER * MAX_MAX_ITER)
+		{
 			data->max_iter += 2;
+		}
 		update_coord(data);
 	}
 	else if (button == 5)
@@ -70,12 +76,15 @@ int	mouse_events(int button, int x, int y, t_data *data)
 		data->zoom_factor_x *= (1 + (ZOOM / 100));
 		data->zoom_factor_y *= (1 + (ZOOM / 100));
 		if (data->max_iter > MAX_ITER)
+		{
 			data->max_iter -= 2;
+		}
 		update_coord(data);
 	}
 	else if (button == 1)
 	{
 		data->julia_c = new_center;
+		data->redraw = 1;
 	}
 	return (0);
 }

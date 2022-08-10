@@ -12,6 +12,12 @@
 
 #include "fractol.h"
 
+/*******************************************************************************
+ * determine color value with hsv to rgb from iteration number                 *
+ * used by julia and mandelbrot set                                            *
+ * @return rgb in a single int value                                           *
+ ******************************************************************************/
+
 int	get_color(const t_data *data, int iter)
 {
 	int	color;
@@ -22,11 +28,11 @@ int	get_color(const t_data *data, int iter)
 		iter = 0;
 	if (iter > 0)
 	{
-		color = hsv_to_rgb((((iter + data->color_offset) % data->max_iter)
+		color = hsv_to_rgb(((iter)
 							* 360) / data->max_iter,
 						   100,
-						   (int) round((log(iter) * 100)
-									   / log(data->max_iter)));
+						   (int) round((pow(iter,0.5) * 100)
+									   / pow(data->max_iter,0.5)),data->color_offset);
 	}
 	else
 		color = 0;
@@ -56,12 +62,13 @@ int	get_mlx_color(double red, double green, double blue)
  * @return a valid color that can be used by put pixel 2 img                   *
  ******************************************************************************/
 
-int	hsv_to_rgb(int hue, int sat, int value)
+int	hsv_to_rgb(int hue, int sat, int value,int offset)
 {
 	double	x;
 	double	c;
 	int		color;
 
+	hue = (hue + offset) % 360;
 	c = ((double)value / 100) * ((double)sat / 100);
 	x = c * (1 - abs((hue / 60) % 2) - 1);
 	if (hue >= 0 && hue < 60)

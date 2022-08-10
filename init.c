@@ -36,6 +36,7 @@ void	init_win(t_data *data)
 
 void	print_usage(char **argv, t_data *data)
 {
+	// TODO : utiliser ft_printf
 	printf("Usage:\n\t %s [options] fractal_type\n", argv[0]);
 	printf("fractal_type :\n\tmandelbrot\n\tjulia\n");
 	printf("Options :\n\t-s size\toverride the default windows size to size\n");
@@ -63,34 +64,34 @@ void	get_args(t_data *data)
 				if (data->argv[argp][1] == 's')
 				{
 					argp++;
-					buf = atoi(data->argv[argp]);
+					buf = ft_atoi(data->argv[argp]);
 					if (buf > 0)
 					{
 						data->size_x = buf + 1;
-						data->size_y = buf + 1; // TODO : utiliser ft_atoi
+						data->size_y = buf + 1;
 					}
 					else
 					{
-						printf("invalid argument\n");
+						printf("invalid argument\n"); // TODO : utiliser ft_printf
 						print_usage(data->argv, data);
 					}
 				}
 			}
 			else if (strcmp(data->argv[argp], "mandelbrot") == 0
-					&& argp + 1 == data->argc) // TODO : utiliser ft_printf
+					&& argp + 1 == data->argc)
 			{
 				data->algorithm = mandelbrot_escape;
 				break ;
 			}
 			else if (strcmp(data->argv[argp], "julia") == 0
-					&& argp + 1 == data->argc) // TODO : utiliser ft_printf
+					&& argp + 1 == data->argc)
 			{
 				data->algorithm = julia_escape;
 				data->max_iter = 90;
 				break ;
 			}
 			else if (strcmp(data->argv[argp], "burning") == 0
-					&& argp + 1 == data->argc) // TODO : utiliser ft_printf
+					&& argp + 1 == data->argc)
 			{
 				data->algorithm = burning_escape;
 				data->max_iter = 100;
@@ -98,7 +99,7 @@ void	get_args(t_data *data)
 			}
 			else
 			{
-				printf("Invalid argument\n");
+				printf("Invalid argument\n"); // TODO : utiliser ft_printf
 				print_usage(data->argv, data);
 			}
 			argp ++;
@@ -157,6 +158,7 @@ void	init_data(t_data *data)
 	data->max_iter = MAX_ITER;
 	data->color_offset = 0;
 	data->exit = 0;
+	data->anim = 3;
 	get_args(data);
 	data->mlx = mlx_init();
 	init_win(data);

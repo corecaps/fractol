@@ -12,17 +12,36 @@
 
 #include "fractol.h"
 
+void	zoom_animation(t_data *data)
+{
+	data->zoom_factor_x *= 0.95;
+	data->zoom_factor_y *= 0.95;
+	data->max_iter += 1;
+	update_coord(data);
+	data->redraw = 1;
+}
+
+void color_shift(t_data *data)
+{
+	data->redraw = 1;
+	if (data->color_offset < 360)
+		data->color_offset += 3;
+	else
+		data->color_offset = 0;
+}
+
 /*******************************************************************************
  * update variable in data structure to handle animation parameters            *
  ******************************************************************************/
 
 void	animations(t_data *data)
 {
-	if (data->color_offset < data->max_iter)
-		data->color_offset += 1;
-	else
-		data->color_offset = 0;
-	data->julia_c = julia_anim(data, &data->julia_c);
+	if ((data->anim & 1) == 1)
+		color_shift(data);
+	if ((data->anim & 2) == 2)
+		data->julia_c = julia_anim(data, &data->julia_c);
+	if ((data->anim & 4) == 4)
+		zoom_animation(data);
 }
 
 /*******************************************************************************

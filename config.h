@@ -22,4 +22,8 @@
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
+# define KEY_1 49
+# define KEY_2 50
+# define KEY_3 51
+# define KEY_SPACE 32
 #endif
