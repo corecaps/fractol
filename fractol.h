@@ -19,6 +19,7 @@
 # include "config.h"
 # include "libftprintf/ft_printf.h"
 
+
 typedef struct s_complex
 {
 	long double	r;
@@ -80,4 +81,5 @@ void		burning_escape(t_data *data);
 void		clean_exit(t_data *data);
 int			win_close(t_data *data);
 int			ft_strcmp(const char *s1, const char *s2);
+void		print_usage(char **argv, t_data *data);
 #endif

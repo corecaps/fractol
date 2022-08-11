@@ -31,8 +31,8 @@ void	user_interface(t_data *data)
 	free(buf);
 	frexp((double)data->zoom_factor_x,&exp);
 	buf = ft_itoa(-exp);
-	mlx_string_put(data->mlx, data->mlx_win, 70, 40, 0xffffff, "zoom :");
-	mlx_string_put(data->mlx, data->mlx_win, 120, 40, 0xffffff, buf);
+	mlx_string_put(data->mlx, data->mlx_win, 80, 40, 0xffffff, "zoom :");
+	mlx_string_put(data->mlx, data->mlx_win, 130, 40, 0xffffff, buf);
 	free(buf);
 }
 

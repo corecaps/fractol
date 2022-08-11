@@ -61,9 +61,6 @@ void	burning_escape(t_data *data)
 		while (x ++ < data->size_x - 1)
 		{
 			color = calc_escape(data, warp_coord_to_complex(x, y, data));
-//			color = (int)round(pow(color, 0.5) * 0xff
-//					/ pow(data->max_iter, 0.5));
-//			color = color * 0x10000;
 			color = hsv_to_rgb(0,
 									   100,
 									   (int) round((pow(color,0.5) * 100)
