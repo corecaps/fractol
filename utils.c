@@ -89,3 +89,22 @@ char	*ft_itoa(int n)
 	result[size] = '\0';
 	return (result);
 }
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+    size_t			pos;
+    unsigned char	*ps1;
+    unsigned char	*ps2;
+
+    ps1 = (unsigned char *)s1;
+    ps2 = (unsigned char *)s2;
+    pos = 0;
+    while ((s1[pos] != '\0'))
+    {
+        if (ps1[pos] == ps2[pos])
+            pos ++;
+        else
+            break ;
+    }
+    return (ps1[pos] - ps2[pos]);
+}

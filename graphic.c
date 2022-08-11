@@ -21,7 +21,6 @@ void	user_interface(t_data *data)
 	char	*buf;
 	int		exp;
 
-
 	mlx_string_put(data->mlx, data->mlx_win, 10, 10, 0xffffff,
 				   "jgarcia's FRACTOL");
 	mlx_string_put(data->mlx, data->mlx_win, 10, 25, 0xffffff,

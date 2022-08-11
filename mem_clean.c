@@ -13,6 +13,18 @@
 #include "fractol.h"
 
 /*******************************************************************************
+ * Close windows and exit cleanly                                              *
+ ******************************************************************************/
+
+int win_close(t_data *data)
+{
+    data->exit = 1;
+    mlx_destroy_window(data->mlx, data->mlx_win);
+    clean_exit(data);
+    return (0);
+}
+
+/*******************************************************************************
  * free every space still allocated on the heap                                *
  * and exit with success                                                       *
  ******************************************************************************/

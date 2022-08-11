@@ -11,10 +11,9 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <string.h>
 
 /*******************************************************************************
- * initalize the window and image buffer                                       *
+ * initialise the window and image buffer                                       *
  ******************************************************************************/
 
 void	init_win(t_data *data)
@@ -37,9 +36,9 @@ void	init_win(t_data *data)
 void	print_usage(char **argv, t_data *data)
 {
 	// TODO : utiliser ft_printf
-	printf("Usage:\n\t %s [options] fractal_type\n", argv[0]);
-	printf("fractal_type :\n\tmandelbrot\n\tjulia\n");
-	printf("Options :\n\t-s size\toverride the default windows size to size\n");
+	ft_printf("Usage:\n\t %s [options] fractal_type\n", argv[0]);
+	ft_printf("fractal_type :\n\tmandelbrot\n\tjulia\n");
+	ft_printf("Options :\n\t-s size\toverride the default windows size to size\n");
 	free(data->img_buffer);
 	free(data);
 	exit(1);
@@ -72,25 +71,25 @@ void	get_args(t_data *data)
 					}
 					else
 					{
-						printf("invalid argument\n"); // TODO : utiliser ft_printf
+						ft_printf("invalid argument\n"); // TODO : utiliser ft_printf
 						print_usage(data->argv, data);
 					}
 				}
 			}
-			else if (strcmp(data->argv[argp], "mandelbrot") == 0
-					&& argp + 1 == data->argc)
+			else if (ft_strcmp(data->argv[argp], "mandelbrot") == 0
+					&& argp + 1 == data->argc) // TODO ft_strcmp
 			{
 				data->algorithm = mandelbrot_escape;
 				break ;
 			}
-			else if (strcmp(data->argv[argp], "julia") == 0
+			else if (ft_strcmp(data->argv[argp], "julia") == 0
 					&& argp + 1 == data->argc)
 			{
 				data->algorithm = julia_escape;
 				data->max_iter = 90;
 				break ;
 			}
-			else if (strcmp(data->argv[argp], "burning") == 0
+			else if (ft_strcmp(data->argv[argp], "burning") == 0
 					&& argp + 1 == data->argc)
 			{
 				data->algorithm = burning_escape;
@@ -99,7 +98,7 @@ void	get_args(t_data *data)
 			}
 			else
 			{
-				printf("Invalid argument\n"); // TODO : utiliser ft_printf
+				ft_printf("Invalid argument\n"); // TODO : utiliser ft_printf
 				print_usage(data->argv, data);
 			}
 			argp ++;
@@ -142,23 +141,17 @@ void	init_data(t_data *data)
 {
 	data->size_x = DEFAULT_X;
 	data->size_y = DEFAULT_Y;
-	// TODO use update coord to limit func size
-	data->start_i = -1.13;
-	data->stop_i = 1.13;
-	data->start_r = -1.7;
-	data->stop_r = 0.5;
-	data->center_x = (data->start_r + data->stop_r) / 2;
-	data->center_y = (data->start_i + data->stop_i) / 2;
-	data->cplx_size_x = (data->stop_r - data->start_r);
-	data->cplx_size_y = data->stop_i - data->start_i;
-	data->zoom_factor_x = data->cplx_size_x / data->size_x;
-	data->zoom_factor_y = data->cplx_size_y / data->size_y;
+	data->center_x = -0.609778L;
+	data->center_y = 0.0L;
+	data->zoom_factor_x = 0.002444;
+	data->zoom_factor_y = 0.002444;
+    update_coord(data);
 	data->redraw = 1;
 	data->algorithm = NULL;
 	data->max_iter = MAX_ITER;
 	data->color_offset = 0;
 	data->exit = 0;
-	data->anim = 3;
+	data->anim = 0;
 	get_args(data);
 	data->mlx = mlx_init();
 	init_win(data);

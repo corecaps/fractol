@@ -19,13 +19,13 @@ int	main(int argc, char **argv)
 	data = main_init(argc, argv);
 	if (data == NULL)
 	{
-		write(1, "allocation error\n", 17);
+		write(2, "allocation error\n", 17);
 		return (1);
 	}
 	mlx_mouse_hook(data->mlx_win, mouse_events, data);
 	mlx_hook(data->mlx_win, 2, 1L << 0, key_pressed, data);
 	mlx_loop_hook(data->mlx, render, data);
-	// TODO implement close window hook
+    mlx_hook(data->mlx_win, 17, 0, win_close, data);
 	mlx_loop(data->mlx);
 	clean_exit(data);
 	return (0);

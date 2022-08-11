@@ -16,8 +16,8 @@
 # include <stdlib.h>
 # include <math.h>
 # include <unistd.h>
-# include <stdio.h>
 # include "config.h"
+# include "libftprintf/ft_printf.h"
 
 typedef struct s_complex
 {
@@ -78,4 +78,6 @@ t_complex	julia_anim(t_data *data, t_complex *c);
 void		animations(t_data *data);
 void		burning_escape(t_data *data);
 void		clean_exit(t_data *data);
+int			win_close(t_data *data);
+int			ft_strcmp(const char *s1, const char *s2);
 #endif

@@ -38,14 +38,28 @@ int	key_pressed(int keycode, t_data *data)
 	else if (keycode == KEY_SPACE)
 		data->anim = 0;
 	else if (keycode == KEY_ESC)
-	{
-		data->exit = 1;
-		mlx_destroy_window(data->mlx, data->mlx_win);
-	}
+        win_close(data);
 	update_coord(data);
 	return (0);
 }
 
+/*******************************************************************************
+ * update data structure to zoom in or out                                     *
+ ******************************************************************************/
+void zoom(t_data *data, t_complex new_center, long double zoom_factor,
+          int iter_mod)
+{
+    data->center_x = (data->center_x + new_center.r) / 2;
+    data->center_y = (data->center_y + new_center.i) / 2;
+    data->zoom_factor_x *= zoom_factor;
+    data->zoom_factor_y *= zoom_factor;
+    if (data->max_iter < MAX_ITER * MAX_MAX_ITER)
+    {
+        data->max_iter += iter_mod;
+    }
+    update_coord(data);
+
+}
 /*******************************************************************************
  * function called via mlx hook to handle mouse event                          *
  * scrolling zoom into simulation                                              *
@@ -58,29 +72,9 @@ int	mouse_events(int button, int x, int y, t_data *data)
 
 	new_center = warp_coord_to_complex(x, y, data);
 	if (button == 4)
-	{
-		data->center_x = (data->center_x + new_center.r) / 2;
-		data->center_y = (data->center_y + new_center.i) / 2;
-		data->zoom_factor_x *= (1 - (ZOOM / 100));
-		data->zoom_factor_y *= (1 - (ZOOM / 100));
-		if (data->max_iter < MAX_ITER * MAX_MAX_ITER)
-		{
-			data->max_iter += 2;
-		}
-		update_coord(data);
-	}
+        zoom(data,new_center,(1 - (ZOOM / 100)), 2);
 	else if (button == 5)
-	{
-		data->center_x = (data->center_x + new_center.r) / 2;
-		data->center_y = (data->center_y + new_center.i) / 2;
-		data->zoom_factor_x *= (1 + (ZOOM / 100));
-		data->zoom_factor_y *= (1 + (ZOOM / 100));
-		if (data->max_iter > MAX_ITER)
-		{
-			data->max_iter -= 2;
-		}
-		update_coord(data);
-	}
+        zoom(data,new_center,(1+(ZOOM / 100)),-2);
 	else if (button == 1)
 	{
 		data->julia_c = new_center;
@@ -90,7 +84,7 @@ int	mouse_events(int button, int x, int y, t_data *data)
 }
 
 /*******************************************************************************
- * update the pixel and complex coordinaete system                             *
+ * update the pixel and complex coordinate system                             *
  ******************************************************************************/
 
 void	update_coord(t_data *data)

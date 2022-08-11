@@ -12,6 +12,10 @@
 
 #include "fractol.h"
 
+/*******************************************************************************
+ * Zoom in every frame increase max_iter to avoid loosing precision            *
+ ******************************************************************************/
+
 void	zoom_animation(t_data *data)
 {
 	data->zoom_factor_x *= 0.95;
@@ -20,6 +24,10 @@ void	zoom_animation(t_data *data)
 	update_coord(data);
 	data->redraw = 1;
 }
+
+/*******************************************************************************
+ * Shift hue color wheel by 3 degres every frame                                *
+ ******************************************************************************/
 
 void color_shift(t_data *data)
 {

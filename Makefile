@@ -12,14 +12,14 @@
 
 NAME = fractol
 CURRENT_DIR = $(shell pwd)
-CC = clang
+LIBPRINTF = $(CURRENT_DIR)/libftprintf/libftprintf.a
+CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g -c
 
 INC = -Iminilibx-linux/
 LINK = -Lminilibx-linux -lmlx_Linux -lXext -lX11 -lm -lz
 
-SRC = main.c graphic.c init.c mandelbrot_escape.c controls.c julia_escape.c utils.c \
-		burning_escape.c mem_clean.c color.c animations.c utils2.c
+SRC = main.c graphic.c init.c mandelbrot_escape.c controls.c julia_escape.c utils.c burning_escape.c mem_clean.c color.c animations.c utils2.c
 
 OBJ = $(SRC:.c=.o)
 
@@ -27,8 +27,11 @@ RM = rm -f
 
 all : $(NAME)
 
-$(NAME): $(OBJ) $(CURRENT_DIR)/minilibx/libmlx_Linux.a
-	$(CC) $(OBJ) $(LINK) -o $(NAME)
+$(NAME): $(OBJ) $(CURRENT_DIR)/minilibx/libmlx_Linux.a $(LIBPRINTF)
+	$(CC) $(OBJ) $(LIBPRINTF) $(LINK) -o $(NAME)
+
+$(LIBPRINTF):
+	make -C $(CURRENT_DIR)/libftprintf
 
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) $< -o $@
