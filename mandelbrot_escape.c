@@ -6,16 +6,16 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:44:13 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/10 00:43:39 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:06:39 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*******************************************************************************
- * iterate mandelbrot function until it escape to infinity for point p         *
- * @return number of iteration it took for function to break stability         *
- ******************************************************************************/
+/******************************************************************************
+ * iterate mandelbrot function until it escape to infinity for point p        *
+ * @return number of iteration it took for function to break stability        *
+ *****************************************************************************/
 
 static int	calc_escape_value(t_data *data, t_complex c)
 {
@@ -35,11 +35,11 @@ static int	calc_escape_value(t_data *data, t_complex c)
 	return (iter);
 }
 
-/*******************************************************************************
- * optimisation : determine if the point c is in the first order cardiod of    *
- * the mandelbrot set                                                          *
- * @return 0 if not in first order cardioid 1 if in cardioid                   *
- ******************************************************************************/
+/******************************************************************************
+ * optimisation : determine if the point c is in the first order cardiod of   *
+ * the mandelbrot set                                                         *
+ * @return 0 if not in first order cardioid 1 if in cardioid                  *
+ *****************************************************************************/
 
 static int	is_in_cardiod(t_complex c)
 {
@@ -52,10 +52,10 @@ static int	is_in_cardiod(t_complex c)
 		return (1);
 }
 
-/*******************************************************************************
- * map each pixel to a point in the complex point determined by simulation     *
- * parameters in data structure and check if the point is in mandelbrot set    *
- ******************************************************************************/
+/******************************************************************************
+ * map each pixel to a point in the complex point determined by simulation    *
+ * parameters in data structure and check if the point is in mandelbrot set   *
+ *****************************************************************************/
 
 void	mandelbrot_escape(t_data *data)
 {

@@ -6,7 +6,7 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 18:08:02 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/10 00:08:15 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:02:18 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # include <unistd.h>
 # include "config.h"
 # include "libftprintf/ft_printf.h"
-
 
 typedef struct s_complex
 {
@@ -56,7 +55,7 @@ typedef struct s_data
 	int			color_offset;
 	int			redraw;
 	int			max_iter;
-	int 		anim;
+	int			anim;
 	int			exit;
 	void		(*algorithm)(struct s_data *);
 }t_data;
@@ -69,7 +68,7 @@ void		mandelbrot_escape(t_data *data);
 int			key_pressed(int keycode, t_data *data);
 int			mouse_events(int button, int x, int y, t_data *data);
 int			get_mlx_color(double red, double green, double blue);
-int			hsv_to_rgb(int hue, int sat, int value,int offset);
+int			hsv_to_rgb(int hue, int sat, int value, int offset);
 void		update_coord(t_data *data);
 void		julia_escape(t_data *data);
 int			get_color(const t_data *data, int iter);

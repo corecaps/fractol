@@ -6,15 +6,15 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 01:38:54 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/10 01:39:05 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/11 14:51:11 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*******************************************************************************
- * Zoom in every frame increase max_iter to avoid loosing precision            *
- ******************************************************************************/
+/******************************************************************************
+ * Zoom in every frame increase max_iter to avoid loosing precision           *
+ *****************************************************************************/
 
 void	zoom_animation(t_data *data)
 {
@@ -25,11 +25,11 @@ void	zoom_animation(t_data *data)
 	data->redraw = 1;
 }
 
-/*******************************************************************************
- * Shift hue color wheel by 3 degres every frame                                *
- ******************************************************************************/
+/******************************************************************************
+ * Shift hue color wheel by 3 degres every frame                              *
+ *****************************************************************************/
 
-void color_shift(t_data *data)
+void	color_shift(t_data *data)
 {
 	data->redraw = 1;
 	if (data->color_offset < 360)
@@ -38,9 +38,9 @@ void color_shift(t_data *data)
 		data->color_offset = 0;
 }
 
-/*******************************************************************************
- * update variable in data structure to handle animation parameters            *
- ******************************************************************************/
+/******************************************************************************
+ * update variable in data structure to handle animation parameters           *
+ *****************************************************************************/
 
 void	animations(t_data *data)
 {
@@ -52,9 +52,9 @@ void	animations(t_data *data)
 		zoom_animation(data);
 }
 
-/*******************************************************************************
- * move the point for julia set in the complex plane                           *
- ******************************************************************************/
+/******************************************************************************
+ * move the point for julia set in the complex plane                          *
+ *****************************************************************************/
 
 t_complex	julia_anim(t_data *data, t_complex *c)
 {

@@ -6,17 +6,17 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:44:13 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/10 00:34:11 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:05:39 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*******************************************************************************
- * iterate julia function until it escape to infinity for point p              *
- * using point data->julia->c                                                  *
- * @return number of iteration it took for function to break stability         *
- ******************************************************************************/
+/******************************************************************************
+ * iterate julia function until it escape to infinity for point p             *
+ * using point data->julia->c                                                 *
+ * @return number of iteration it took for function to break stability        *
+ *****************************************************************************/
 static int	calc_escape(t_data *data, t_complex c, t_complex p)
 {
 	long double	tmp;
@@ -33,10 +33,10 @@ static int	calc_escape(t_data *data, t_complex c, t_complex p)
 	return (iter);
 }
 
-/*******************************************************************************
- * map each pixel to a point in the complex point determined by simulation     *
- * parameters in data structure and check if the point is in julia set         *
- ******************************************************************************/
+/******************************************************************************
+ * map each pixel to a point in the complex point determined by simulation    *
+ * parameters in data structure and check if the point is in julia set        *
+ *****************************************************************************/
 
 void	julia_escape(t_data *data)
 {

@@ -6,17 +6,17 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 01:37:09 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/10 01:37:22 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/11 14:58:06 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*******************************************************************************
- * determine color value with hsv to rgb from iteration number                 *
- * used by julia and mandelbrot set                                            *
- * @return rgb in a single int value                                           *
- ******************************************************************************/
+/******************************************************************************
+ * determine color value with hsv to rgb from iteration number                *
+ * used by julia and mandelbrot set                                           *
+ * @return rgb in a single int value                                          *
+ *****************************************************************************/
 
 int	get_color(const t_data *data, int iter)
 {
@@ -29,20 +29,20 @@ int	get_color(const t_data *data, int iter)
 	if (iter > 0)
 	{
 		color = hsv_to_rgb(((iter)
-							* 360) / data->max_iter,
-						   100,
-						   (int) round((pow(iter,0.5) * 100)
-									   / pow(data->max_iter,0.5)),data->color_offset);
+					* 360) / data->max_iter,
+				100,
+				(int) round((pow(iter, 0.5) * 100)
+					/ pow(data->max_iter, 0.5)), data->color_offset);
 	}
 	else
 		color = 0;
 	return (color);
 }
 
-/*******************************************************************************
- * translate double value (between 0.0 and 1.0) to a single color value int    *
- * @return a valid mlx color value used by put pixel 2 img                     *
- ******************************************************************************/
+/******************************************************************************
+ * translate double value (between 0.0 and 1.0) to a single color value int   *
+ * @return a valid mlx color value used by put pixel 2 img                    *
+ *****************************************************************************/
 
 int	get_mlx_color(double red, double green, double blue)
 {
@@ -56,13 +56,13 @@ int	get_mlx_color(double red, double green, double blue)
 	return (r * 0x10000 + g * 0x100 + b);
 }
 
-/*******************************************************************************
- * transform a color described by hue (in degre) sat (%) value(%) to rgb in    *
- * single int                                                                  *
- * @return a valid color that can be used by put pixel 2 img                   *
- ******************************************************************************/
+/******************************************************************************
+ * transform a color described by hue (in degre) sat (%) value(%) to rgb in   *
+ * single int                                                                 *
+ * @return a valid color that can be used by put pixel 2 img                  *
+ *****************************************************************************/
 
-int	hsv_to_rgb(int hue, int sat, int value,int offset)
+int	hsv_to_rgb(int hue, int sat, int value, int offset)
 {
 	double	x;
 	double	c;

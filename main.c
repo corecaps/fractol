@@ -6,7 +6,7 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/22 17:58:30 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/10 00:35:13 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:06:03 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "fractol.h"
@@ -25,7 +25,7 @@ int	main(int argc, char **argv)
 	mlx_mouse_hook(data->mlx_win, mouse_events, data);
 	mlx_hook(data->mlx_win, 2, 1L << 0, key_pressed, data);
 	mlx_loop_hook(data->mlx, render, data);
-    mlx_hook(data->mlx_win, 17, 0, win_close, data);
+	mlx_hook(data->mlx_win, 17, 0, win_close, data);
 	mlx_loop(data->mlx);
 	clean_exit(data);
 	return (0);

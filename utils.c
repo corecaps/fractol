@@ -6,34 +6,34 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:44:20 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/10 00:45:06 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:09:27 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*******************************************************************************
- * map pixel coordinate to complex point coordinates                           *
- ******************************************************************************/
+/******************************************************************************
+ * map pixel coordinate to complex point coordinates                          *
+ *****************************************************************************/
 
 t_complex	warp_coord_to_complex(int x, int y, t_data *data)
 {
 	t_complex	point;
 
 	point.r = data->start_r
-			  + ((long double)(x * (data->stop_r - data->start_r)))
-				/ data->size_x;
+		+ ((long double)(x * (data->stop_r - data->start_r)))
+		/ data->size_x;
 	point.i = data->start_i
-			  + ((long double)(y * (data->stop_i - data->start_i)))
-				/ data->size_y;
+		+ ((long double)(y * (data->stop_i - data->start_i)))
+		/ data->size_y;
 	return (point);
 }
 
-/*******************************************************************************
- * ft_itoa util function to determine size of the string to be allocated       *
- * @param n number to convert                                                  *
- * @return size of the string                                                  *
- ******************************************************************************/
+/******************************************************************************
+ * ft_itoa util function to determine size of the string to be allocated      *
+ * @param n number to convert                                                 *
+ * @return size of the string                                                 *
+ *****************************************************************************/
 
 static int	ft_int_dec_size(long int n)
 {
@@ -47,12 +47,13 @@ static int	ft_int_dec_size(long int n)
 	}
 	return (size);
 }
-/*******************************************************************************
+
+/******************************************************************************
  * ft_itoa utils function
- * convert a base 10 int  to corresponding ascii string                        *
- * @param n int to convert                                                     *
- * @param buf pointer to a heap allocated string of size + 1                   *
- ******************************************************************************/
+ * convert a base 10 int  to corresponding ascii string                       *
+ * @param n int to convert                                                    *
+ * @param buf pointer to a heap allocated string of size + 1                  *
+ *****************************************************************************/
 static void	ft_dectoascii(long int n, char *buf, size_t index)
 {
 	if (n > 9)
@@ -60,11 +61,11 @@ static void	ft_dectoascii(long int n, char *buf, size_t index)
 	buf[index] = (n % 10) + '0';
 }
 
-/*******************************************************************************
- * convert an int to a string                                                  *
- * @param n number to convert into string                                      *
- * @return a pointer to the string (heap allocated)                            *
- ******************************************************************************/
+/******************************************************************************
+ * convert an int to a string                                                 *
+ * @param n number to convert into string                                     *
+ * @return a pointer to the string (heap allocated)                           *
+ *****************************************************************************/
 
 char	*ft_itoa(int n)
 {
@@ -92,19 +93,19 @@ char	*ft_itoa(int n)
 
 int	ft_strcmp(const char *s1, const char *s2)
 {
-    size_t			pos;
-    unsigned char	*ps1;
-    unsigned char	*ps2;
+	size_t			pos;
+	unsigned char	*ps1;
+	unsigned char	*ps2;
 
-    ps1 = (unsigned char *)s1;
-    ps2 = (unsigned char *)s2;
-    pos = 0;
-    while ((s1[pos] != '\0'))
-    {
-        if (ps1[pos] == ps2[pos])
-            pos ++;
-        else
-            break ;
-    }
-    return (ps1[pos] - ps2[pos]);
+	ps1 = (unsigned char *)s1;
+	ps2 = (unsigned char *)s2;
+	pos = 0;
+	while ((s1[pos] != '\0'))
+	{
+		if (ps1[pos] == ps2[pos])
+			pos ++;
+		else
+			break ;
+	}
+	return (ps1[pos] - ps2[pos]);
 }

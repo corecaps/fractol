@@ -6,18 +6,18 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 00:02:34 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/10 00:03:53 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/11 15:01:36 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-/*******************************************************************************
+/******************************************************************************
  * function is called via mlx hook
  * keys affect the configuration of the simulation
  * keycode value are defined in config.h
  * @return 0 in every cases
- ******************************************************************************/
+ *****************************************************************************/
 
 int	key_pressed(int keycode, t_data *data)
 {
@@ -38,33 +38,32 @@ int	key_pressed(int keycode, t_data *data)
 	else if (keycode == KEY_SPACE)
 		data->anim = 0;
 	else if (keycode == KEY_ESC)
-        win_close(data);
+		win_close(data);
 	update_coord(data);
 	return (0);
 }
 
-/*******************************************************************************
- * update data structure to zoom in or out                                     *
- ******************************************************************************/
-void zoom(t_data *data, t_complex new_center, long double zoom_factor,
-          int iter_mod)
+/******************************************************************************
+ * update data structure to zoom in or out                                    *
+ *****************************************************************************/
+void	zoom(t_data *data, t_complex new_center, long double zoom_factor,
+				int iter_mod)
 {
-    data->center_x = (data->center_x + new_center.r) / 2;
-    data->center_y = (data->center_y + new_center.i) / 2;
-    data->zoom_factor_x *= zoom_factor;
-    data->zoom_factor_y *= zoom_factor;
-    if (data->max_iter < MAX_ITER * MAX_MAX_ITER)
-    {
-        data->max_iter += iter_mod;
-    }
-    update_coord(data);
-
+	data->center_x = (data->center_x + new_center.r) / 2;
+	data->center_y = (data->center_y + new_center.i) / 2;
+	data->zoom_factor_x *= zoom_factor;
+	data->zoom_factor_y *= zoom_factor;
+	if (data->max_iter < MAX_ITER * MAX_MAX_ITER)
+	{
+		data->max_iter += iter_mod;
+	}
+	update_coord(data);
 }
-/*******************************************************************************
- * function called via mlx hook to handle mouse event                          *
- * scrolling zoom into simulation                                              *
- * left click set a new point for julia simulation                             *
- ******************************************************************************/
+/******************************************************************************
+ * function called via mlx hook to handle mouse event                         *
+ * scrolling zoom into simulation                                             *
+ * left click set a new point for julia simulation                            *
+ *****************************************************************************/
 
 int	mouse_events(int button, int x, int y, t_data *data)
 {
@@ -72,9 +71,9 @@ int	mouse_events(int button, int x, int y, t_data *data)
 
 	new_center = warp_coord_to_complex(x, y, data);
 	if (button == 4)
-        zoom(data,new_center,(1 - (ZOOM / 100)), 2);
+		zoom(data, new_center, (1 - (ZOOM / 100)), 2);
 	else if (button == 5)
-        zoom(data,new_center,(1+(ZOOM / 100)),-2);
+		zoom(data, new_center, (1 + (ZOOM / 100)), -2);
 	else if (button == 1)
 	{
 		data->julia_c = new_center;
@@ -83,9 +82,9 @@ int	mouse_events(int button, int x, int y, t_data *data)
 	return (0);
 }
 
-/*******************************************************************************
+/******************************************************************************
  * update the pixel and complex coordinate system                             *
- ******************************************************************************/
+ *****************************************************************************/
 
 void	update_coord(t_data *data)
 {
