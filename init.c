@@ -35,7 +35,6 @@ void	init_win(t_data *data)
 
 void	print_usage(char **argv, t_data *data)
 {
-	// TODO : utiliser ft_printf
 	ft_printf("Usage:\n\t %s [options] fractal_type\n", argv[0]);
 	ft_printf("fractal_type :\n\tmandelbrot\n\tjulia\n");
 	ft_printf("Options :\n\t-s size\toverride the default windows size to size\n");
@@ -71,13 +70,13 @@ void	get_args(t_data *data)
 					}
 					else
 					{
-						ft_printf("invalid argument\n"); // TODO : utiliser ft_printf
+						ft_printf("invalid argument\n");
 						print_usage(data->argv, data);
 					}
 				}
 			}
 			else if (ft_strcmp(data->argv[argp], "mandelbrot") == 0
-					&& argp + 1 == data->argc) // TODO ft_strcmp
+					&& argp + 1 == data->argc)
 			{
 				data->algorithm = mandelbrot_escape;
 				break ;
@@ -98,7 +97,7 @@ void	get_args(t_data *data)
 			}
 			else
 			{
-				ft_printf("Invalid argument\n"); // TODO : utiliser ft_printf
+				ft_printf("Invalid argument\n");
 				print_usage(data->argv, data);
 			}
 			argp ++;
