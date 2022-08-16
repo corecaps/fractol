@@ -6,7 +6,7 @@
 /*   By: jgarcia <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/11 14:11:05 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/11 14:54:36 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:11:52 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_opt(t_data *data, int argp)
 	if (data->argv[argp][1] == 's')
 	{
 		get_opt_value(data, &argp, &buf);
-		if (buf > 0)
+		if (buf > 10 && buf < 2000)
 		{
 			data->size_x = buf + 1;
 			data->size_y = buf + 1;
@@ -40,7 +40,7 @@ int	get_opt(t_data *data, int argp)
 	else if (data->argv[argp][1] == 'a')
 	{
 		get_opt_value(data, &argp, &buf);
-		if (buf > 0)
+		if (buf > 0 && buf < 10)
 			data->anim = buf;
 		else
 			print_usage(data->argv, data);

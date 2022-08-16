@@ -6,7 +6,7 @@
 /*   By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 12:39:08 by jgarcia           #+#    #+#             */
-/*   Updated: 2022/08/11 15:05:07 by jgarcia          ###   ########.fr       */
+/*   Updated: 2022/08/11 17:12:21 by jgarcia          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,8 @@ void	init_data(t_data *data)
 	data->color_offset = 0;
 	data->exit = 0;
 	data->anim = 0;
+	data->julia_c.i = 0.6;
+	data->julia_c.r = -0.4;
 	get_args(data);
 	data->mlx = mlx_init();
 	init_win(data);
