@@ -6,7 +6,7 @@
 #    By: jgarcia <jgarcia@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/22 17:57:00 by jgarcia           #+#    #+#              #
-#    Updated: 2022/08/10 00:35:45 by jgarcia          ###   ########.fr        #
+#    Updated: 2022/08/27 12:49:17 by jgarcia          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ RM = rm -f
 
 all : $(NAME)
 
-$(NAME): $(OBJ) $(CURRENT_DIR)/minilibx/libmlx_Linux.a $(LIBPRINTF)
+$(NAME): $(OBJ) $(CURRENT_DIR)/minilibx-linux/libmlx_Linux.a $(LIBPRINTF)
 	$(CC) $(OBJ) $(LIBPRINTF) $(LINK) -o $(NAME)
 
 $(LIBPRINTF):
@@ -36,7 +36,7 @@ $(LIBPRINTF):
 %.o: %.c
 	$(CC) $(CFLAGS) $(INC) $< -o $@
 
-$(CURRENT_DIR)/minilibx/libmlx_Linux.a:
+$(CURRENT_DIR)/minilibx-linux/libmlx_Linux.a:
 	make -C minilibx-linux
 
 clean:
